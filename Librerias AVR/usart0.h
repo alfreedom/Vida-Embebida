@@ -1,90 +1,90 @@
 /***************************************************************************************
  * usart0.h
  *
- *		Autor:		Alfredo Orozco de la Paz
- *  	Archivo:	usart0.h
- *   	Fecha:		10/07/2014
- *    	e-mail:		alfredoopa@gmail.com
+ *      Autor:      Alfredo Orozco de la Paz
+ *      Archivo:    usart0.h
+ *      Fecha:      10/07/2014
+ *      e-mail:     alfredoopa@gmail.com
  *
- *		Procesador:	ATmega48, ATmega88, ATmega168, ATmega328
- * 		Familia:	AVRmega
- *   	Compilador:	GNU avr-gcc
+ *      Procesador: ATmega48, ATmega88, ATmega168, ATmega328
+ *      Familia:    AVRmega
+ *      Compilador: GNU avr-gcc
  *
  *  Descripción:
  *
- *	Libreria para el manejo de la USART0 de los microcontroladores
- *	AVR ATmega48/88/168/328 escrita en el compilador GNU avr-gcc.
+ *  Libreria para el manejo de la USART0 de los microcontroladores
+ *  AVR ATmega48/88/168/328 escrita en el compilador GNU avr-gcc.
  *
- *	La libreria implementa funcines para inicializar la USART0, enviar
- *	y recibir datos por el puerto serie, verificar si hay dato disponible
- *	y enviar cadenas de texto.
+ *  La libreria implementa funcines para inicializar la USART0, enviar
+ *  y recibir datos por el puerto serie, verificar si hay dato disponible
+ *  y enviar cadenas de texto.
  *
- *	Cuenta con la posibilidad hacer uso de las interrupciones para el envío y 
- *	recepcion de datos, con lo que los datos recibidos y enviados se almacenan
- *	en un buffer temporarl (FIFO) que serán llenados o vaciados por las funciones
- *	de las interruciones por dato recibido o por transmisor vacío. Para hacer uso
- *	de las interrupciones se usan las definiciones: 
- *	    
- *	        #define USE_USART0_RX_INTETTUPT	// Usa la interrupción de dato disponible en RX
- *	        #define USE_USART0_TX_INTERRUPT	// Usa la interrupcion de transmisor vacío
- *	        #define USE_USART0_INTERRUPTS	// Usa las 2 interrupciónes
+ *  Cuenta con la posibilidad hacer uso de las interrupciones para el envío y 
+ *  recepcion de datos, con lo que los datos recibidos y enviados se almacenan
+ *  en un buffer temporarl (FIFO) que serán llenados o vaciados por las funciones
+ *  de las interruciones por dato recibido o por transmisor vacío. Para hacer uso
+ *  de las interrupciones se usan las definiciones: 
+ *      
+ *          #define USE_USART0_RX_INTETTUPT // Usa la interrupción de dato disponible en RX
+ *          #define USE_USART0_TX_INTERRUPT // Usa la interrupcion de transmisor vacío
+ *          #define USE_USART0_INTERRUPTS   // Usa las 2 interrupciónes
  *
- * 		Uso:
- * 			#define USE_USART0_RX_INTERRUPT
- * 			#include "usart.h"
- *	        
- *	El programador puede activar y atender las interrupcions por su cuenta
- *	omitiendo las definiciones anteriormente mencionadas.
+ *      Uso:
+ *          #define USE_USART0_RX_INTERRUPT
+ *          #include "usart.h"
+ *          
+ *  El programador puede activar y atender las interrupcions por su cuenta
+ *  omitiendo las definiciones anteriormente mencionadas.
  *
- *	Para el caso de que se usen interrupciones, se debe tomar en cuenta el
- *	tamaño de los buffer de entrada y salida (FIFO), ya que es espacio en memoria RAM 
- *	y hay que considerar ese espacio en el desarrollo de la aplicacion. Por default
- *	se define un buffer de 128 bytes, que bien puede ser ampliado por el programador 
- *	(a un maximo de 255 para los indices de tipo char) y que es	util en microcontroladores 
- *	de mayores capacidades.
+ *  Para el caso de que se usen interrupciones, se debe tomar en cuenta el
+ *  tamaño de los buffer de entrada y salida (FIFO), ya que es espacio en memoria RAM 
+ *  y hay que considerar ese espacio en el desarrollo de la aplicacion. Por default
+ *  se define un buffer de 128 bytes, que bien puede ser ampliado por el programador 
+ *  (a un maximo de 255 para los indices de tipo char) y que es util en microcontroladores 
+ *  de mayores capacidades.
  *
- *	Se puede hacer uso de la entrada y salida estandar para el envio y
- *	recepcion de datos con la libreria "stdio.h", usando las funciones
- *	printf, scanf, putc, etc. Para el uso de esta propiedad hay que hacer
- *	la definicion "#define USE_USART0_STDIO".
+ *  Se puede hacer uso de la entrada y salida estandar para el envio y
+ *  recepcion de datos con la libreria "stdio.h", usando las funciones
+ *  printf, scanf, putc, etc. Para el uso de esta propiedad hay que hacer
+ *  la definicion "#define USE_USART0_STDIO".
  *
- * 	 	Uso:
- * 			#define USE_USART0_STDIO
- * 			#include "usart.h"
+ *      Uso:
+ *          #define USE_USART0_STDIO
+ *          #include "usart.h"
  *
  *
- *	Las funciones de la libreria son:
+ *  Las funciones de la libreria son:
  *
- *	---------------------------------------------------------------------------------
- *	|	void USART0_Init(int baudrate) *
- *	|		Inicializa la comunicación estandar (8N1) con el baudaje especificado.
- *	---------------------------------------------------------------------------------
- * 	|	void USART0_Init2(int baudrate,
- *	|					unsigned char stop_bits,
- *	|					unsigned char parity,
- *	|					unsigned char data_size)
- *	|
- *	|	Inicializa la comunicacion configurando todos los parametros.
- *	---------------------------------------------------------------------------------
- *	|	void USART0_PutChar(char c)
- *	|		Envia un dato por la USART0.
- *	---------------------------------------------------------------------------------
- *	|	int USART0_GetChar()
- *	|		Lee un dato recibido en la USART0.
- *	---------------------------------------------------------------------------------
- *	|	void USART0_PutString(char *str)
- *	|		Envia una cadena de caracteres por la USART0.
- *	---------------------------------------------------------------------------------
- *	|	int USART0_Kbhit()
- *	|		Determina si hay un dato para ser leido de la USART0, o el numero
- *	|		de datos en el buffer de entrada si se usa interrupcion.
- *	---------------------------------------------------------------------------------
+ *  ---------------------------------------------------------------------------------
+ *  |   void USART0_Init(int baudrate) *
+ *  |       Inicializa la comunicación estandar (8N1) con el baudaje especificado.
+ *  ---------------------------------------------------------------------------------
+ *  |   void USART0_Init2(int baudrate,
+ *  |                   unsigned char stop_bits,
+ *  |                   unsigned char parity,
+ *  |                   unsigned char data_size)
+ *  |
+ *  |   Inicializa la comunicacion configurando todos los parametros.
+ *  ---------------------------------------------------------------------------------
+ *  |   void USART0_PutChar(char c)
+ *  |       Envia un dato por la USART0.
+ *  ---------------------------------------------------------------------------------
+ *  |   int USART0_GetChar()
+ *  |       Lee un dato recibido en la USART0.
+ *  ---------------------------------------------------------------------------------
+ *  |   void USART0_PutString(char *str)
+ *  |       Envia una cadena de caracteres por la USART0.
+ *  ---------------------------------------------------------------------------------
+ *  |   int USART0_Kbhit()
+ *  |       Determina si hay un dato para ser leido de la USART0, o el numero
+ *  |       de datos en el buffer de entrada si se usa interrupcion.
+ *  ---------------------------------------------------------------------------------
  *
- * 	Ejemplo de uso:
+ *  Ejemplo de uso:
  *
- * 	
+ *  
  *
- *	#define F_CPU 8000000L 
+ *  #define F_CPU 8000000L 
  *  #define USE_USART0_RX_INTERRUPT
  *  #define USE_USART0_TX_INTERRUPT
  *  #define USE_USART0_STDIO
@@ -95,20 +95,20 @@
  *
  *  int main(void) 
  *  {
- *  	USART0_Init(9600);
- *  	sei();
+ *      USART0_Init(9600);
+ *      sei();
  *
- * 		USART0_PutString("Ejemplo ECO con la USART0.\n");
- * 		
- * 		while(1){
- * 		
- * 			if(USART0_Kbhit()){
- * 			
- * 				printf( "Tecla: %c" , USART0_GetChar() );
- * 				_delay_ms(10);
- * 				
- * 			}
- * 		}
+ *      USART0_PutString("Ejemplo ECO con la USART0.\n");
+ *      
+ *      while(1){
+ *      
+ *          if(USART0_Kbhit()){
+ *          
+ *              printf( "Tecla: %c" , USART0_GetChar() );
+ *              _delay_ms(10);
+ *              
+ *          }
+ *      }
  *  }
  *
  ***************************************************************************************
@@ -142,17 +142,17 @@
 #include <avr/io.h>
 
 
-#define USART0_DATA_SIZE_5	0x00					/*Tamaño de palabra de 5 bits*/
-#define USART0_DATA_SIZE_6 	_BV(UCSZ00)				/*Tamaño de palabra de 6 bits*/
-#define USART0_DATA_SIZE_7	_BV(UCSZ01)				/*Tamaño de palabra de 7 bits*/
-#define USART0_DATA_SIZE_8	_BV(UCSZ00) | _BV(UCSZ01)	/*tamaño de palabra de 8 bits*/
+#define USART0_DATA_SIZE_5  0x00                    /*Tamaño de palabra de 5 bits*/
+#define USART0_DATA_SIZE_6  _BV(UCSZ00)             /*Tamaño de palabra de 6 bits*/
+#define USART0_DATA_SIZE_7  _BV(UCSZ01)             /*Tamaño de palabra de 7 bits*/
+#define USART0_DATA_SIZE_8  _BV(UCSZ00) | _BV(UCSZ01)   /*tamaño de palabra de 8 bits*/
 
-#define USART0_PARITY_OFF		0x00					/*Sin paridad*/
-#define USART0_PARITY_EVEN_ON	_BV(UPM01)				/*Paridad Par*/
-#define USART0_PARITY_ODD_ON	_BV(UPM01) | _BV(UPM00)	/*Paridad Impar*/
+#define USART0_PARITY_OFF       0x00                    /*Sin paridad*/
+#define USART0_PARITY_EVEN_ON   _BV(UPM01)              /*Paridad Par*/
+#define USART0_PARITY_ODD_ON    _BV(UPM01) | _BV(UPM00) /*Paridad Impar*/
 
-#define USART0_STOP_BITS_1	0x00		/*1 bit de parada*/
-#define USART0_STOP_BITS_2	_BV(USBS)	/*2 bit de parada*/
+#define USART0_STOP_BITS_1  0x00        /*1 bit de parada*/
+#define USART0_STOP_BITS_2  _BV(USBS)   /*2 bit de parada*/
 
 /************************************************************************ 
  * Macro calcular el valor de los registros generadores del
@@ -162,7 +162,7 @@
 
 
 /************************************************************************ 
- *						Declaración de Funciones 	
+ *                      Declaración de Funciones    
  ************************************************************************/
 
 void USART0_Init(int baudrate);
@@ -184,20 +184,20 @@ int USART0_Kbhit();
 #endif
 
 #if defined(USE_USART0_RX_INTERRUPT)
-	#include <avr/interrupt.h>
-	#define MAX_IN_BUFFER 128
-	volatile char _rx_buffer[MAX_IN_BUFFER];
-	volatile int _headrx;
-	volatile int _tailrx;
+    #include <avr/interrupt.h>
+    #define MAX_IN_BUFFER 128
+    volatile char _rx_buffer[MAX_IN_BUFFER];
+    volatile int _headrx;
+    volatile int _tailrx;
 #endif
 
 #if defined(USE_USART0_TX_INTERRUPT) 
-	#include <avr/interrupt.h>
-	#define MAX_OUT_BUFFER 128
-	volatile char _tx_buffer[MAX_OUT_BUFFER];
-	volatile unsigned int _headtx;
-	volatile unsigned int _tailtx;
-	volatile unsigned char _txbusy;
+    #include <avr/interrupt.h>
+    #define MAX_OUT_BUFFER 128
+    volatile char _tx_buffer[MAX_OUT_BUFFER];
+    volatile unsigned int _headtx;
+    volatile unsigned int _tailtx;
+    volatile unsigned char _txbusy;
 #endif
 
 /************************************************************************
@@ -206,15 +206,15 @@ int USART0_Kbhit();
  * enviar y leer un dato mediante las funciones de la USART.
  ************************************************************************/
 #if defined(USE_USART0_STDIO)
-	#include <stdio.h>
-	static int _usart_putchar(char c, FILE *stream);
-	static int _usart_getchar(FILE *stream);
-	static FILE _myiostream = FDEV_SETUP_STREAM(_usart_putchar, _usart_getchar, _FDEV_SETUP_RW);
+    #include <stdio.h>
+    static int _usart_putchar(char c, FILE *stream);
+    static int _usart_getchar(FILE *stream);
+    static FILE _myiostream = FDEV_SETUP_STREAM(_usart_putchar, _usart_getchar, _FDEV_SETUP_RW);
 #endif
 
 
 /************************************************************************
- * 			Implementacion de las funciones de la librería
+ *          Implementacion de las funciones de la librería
  ************************************************************************/
 
 /************************************************************************
@@ -227,14 +227,14 @@ int USART0_Kbhit();
  * USE_USART0_STDIO.
  *
  * Recibe:
- * 		-baudrate: Velocidad en baudios a la que trabajará la USART0.
+ *      -baudrate: Velocidad en baudios a la que trabajará la USART0.
  *
  ************************************************************************/
 void USART0_Init(int baudrate) {
 
-	USART0_Init2(baudrate, USART0_STOP_BITS_1,
-				USART0_PARITY_OFF,
-				USART0_DATA_SIZE_8);
+    USART0_Init2(baudrate, USART0_STOP_BITS_1,
+                USART0_PARITY_OFF,
+                USART0_DATA_SIZE_8);
 
 }
 
@@ -250,50 +250,50 @@ void USART0_Init(int baudrate) {
  *
  * Recibe:
  *
- * 		 baudrate: 	Velocidad en baudios a la que trabajará la USART0.
- * 		 strop_bits:	Numero de bits de parada
- * 							USART0_STOP_BITS_1		-	1 Bit de parada.
- * 							USART0_STOP_BITS_2		-	2 Bits de parada.
- * 		 parity:		Paridad.
- * 							USART0_PARITY_OFF		-	Sin paridad
- * 							USART0_PARITY_EVEN_ON	-	Paridad Par
- * 							USART0_PARITY_ODD_ON	-	Paridad Impar
- * 		 data_size:	Tamaño de palabra
- * 							USART0_DATA_SIZE_5		-	Tamaño de palabra de 5 bits
- * 							USART0_DATA_SIZE_6		-	Tamaño de palabra de 6 bits
- * 							USART0_DATA_SIZE_7		-	Tamaño de palabra de 7 bits
- * 							USART0_DATA_SIZE_8		-	Tamaño de palabra de 8 bits
+ *       baudrate:  Velocidad en baudios a la que trabajará la USART0.
+ *       strop_bits:    Numero de bits de parada
+ *                          USART0_STOP_BITS_1      -   1 Bit de parada.
+ *                          USART0_STOP_BITS_2      -   2 Bits de parada.
+ *       parity:        Paridad.
+ *                          USART0_PARITY_OFF       -   Sin paridad
+ *                          USART0_PARITY_EVEN_ON   -   Paridad Par
+ *                          USART0_PARITY_ODD_ON    -   Paridad Impar
+ *       data_size: Tamaño de palabra
+ *                          USART0_DATA_SIZE_5      -   Tamaño de palabra de 5 bits
+ *                          USART0_DATA_SIZE_6      -   Tamaño de palabra de 6 bits
+ *                          USART0_DATA_SIZE_7      -   Tamaño de palabra de 7 bits
+ *                          USART0_DATA_SIZE_8      -   Tamaño de palabra de 8 bits
  *
  ************************************************************************/
 void USART0_Init2(int baudrate,
-				 unsigned char stop_bits,
-				 unsigned char parity,
-				 unsigned char data_size) {
+                 unsigned char stop_bits,
+                 unsigned char parity,
+                 unsigned char data_size) {
 
-	/*Se programa el valor del baudrate segun la formula del datasheet*/
-	UBRR0L = MYUBRR(baudrate);
-	UBRR0H = MYUBRR(baudrate) >> 8;
+    /*Se programa el valor del baudrate segun la formula del datasheet*/
+    UBRR0L = MYUBRR(baudrate);
+    UBRR0H = MYUBRR(baudrate) >> 8;
 
-	UCSR0C =  stop_bits | parity | data_size;
+    UCSR0C =  stop_bits | parity | data_size;
 
-	/*Habilitamos el transmisor y el receptor*/
-	UCSR0B = _BV(RXEN0) | _BV(TXEN0);
+    /*Habilitamos el transmisor y el receptor*/
+    UCSR0B = _BV(RXEN0) | _BV(TXEN0);
 
 #ifdef defined(USE_USART0_RX_INTERRUPT) 
-	UCSR0B |= _BV(RXCIE0);
-	_head=0;
-	_tail=0;
+    UCSR0B |= _BV(RXCIE0);
+    _head=0;
+    _tail=0;
 #endif
 
 #if defined(USE_USART0_TX_INTERRUPT)
-	UCSRB |= _BV(TXCIE0);
-	_headtx=0;
-	_tailtx=0;
-	_txbusy=0;
+    UCSRB |= _BV(TXCIE0);
+    _headtx=0;
+    _tailtx=0;
+    _txbusy=0;
 #endif
 
 #ifdef USE_USART0_STDIO
-	stdout = stdin = & _myiostream;
+    stdout = stdin = & _myiostream;
 #endif
 
 }
@@ -305,34 +305,34 @@ void USART0_Init2(int baudrate,
  *
  * Recibe:
  *
- * 		- byte:	Dato a enviar por el puerto serie.
+ *      - byte: Dato a enviar por el puerto serie.
  ************************************************************************/
 void USART0_PutChar(char byte) {
 
 #if defined(USE_USART0_TX_INTERRUPT)
-	
-	if(!_txbusy) {
+    
+    if(!_txbusy) {
 
-		_txbusy=1;
-		UDR0 = c;
+        _txbusy=1;
+        UDR0 = c;
 
-	}
-	else {
+    }
+    else {
 
-		UCSRB &= ~_BV(TXCIE0);
+        UCSRB &= ~_BV(TXCIE0);
 
-		_tx_buffer[_tailtx++] = c;
+        _tx_buffer[_tailtx++] = c;
 
-		if(_tailtx>MAX_OUT_BUFFER)
-			_tailtx=0;
+        if(_tailtx>MAX_OUT_BUFFER)
+            _tailtx=0;
 
-		UCSRB |= _BV(TXCIE0);
+        UCSRB |= _BV(TXCIE0);
 
-	}
-	
+    }
+    
 #else
-	while (!(UCSR0A & _BV(UDRE0)));
-	UDR0 = byte;
+    while (!(UCSR0A & _BV(UDRE0)));
+    UDR0 = byte;
 #endif
 }
 
@@ -344,26 +344,26 @@ void USART0_PutChar(char byte) {
  * del buffer de entrada, de lo contrario esperara a
  * que un dato este disponible en el registro de entrada.
  *
- * 	Devuelve:
- * 		El dato leido del puerto serie o del buffer de entrada.
+ *  Devuelve:
+ *      El dato leido del puerto serie o del buffer de entrada.
  *
  ************************************************************************/
 int USART0_GetChar() {
 
 #if defined(USE_USART0_RX_INTERRUPT)
 
-	char ret=-1;
-	if(_headrx != _tailrx) {
-		ret=_in_buffer[_headrx++];
-		if(_headrx>MAX_IN_BUFFER)
-		_headrx=0;		
-	}
+    char ret=-1;
+    if(_headrx != _tailrx) {
+        ret=_in_buffer[_headrx++];
+        if(_headrx>MAX_IN_BUFFER)
+        _headrx=0;      
+    }
 
-	return ret;
+    return ret;
 
 #else
-	while (!(UCSR0A & _BV(RXC0)));
-	return UDR0;
+    while (!(UCSR0A & _BV(RXC0)));
+    return UDR0;
 #endif
 
 
@@ -376,12 +376,12 @@ int USART0_GetChar() {
  * Envia una cadena de caracteres por el puerto serie.
  *
  * Recibe:
- * 		- str:		Apuntador a la cadena de caracteres.
+ *      - str:      Apuntador a la cadena de caracteres.
  ************************************************************************/
 void USART0_PutString(char *str) {
 
-	while (*str)
-		USART0_PutChar(*str++);
+    while (*str)
+        USART0_PutChar(*str++);
 }
 
 /************************************************************************
@@ -397,9 +397,9 @@ void USART0_PutString(char *str) {
 int USART0_Kbhit() {
 
 #if defined(USE_USART0_RX_INTERRUPT)
-	return _tailrx - _headrx;
+    return _tailrx - _headrx;
 #else
-	return (UCSR0A & _BV(RXC0));
+    return (UCSR0A & _BV(RXC0));
 #endif
 
 }
@@ -417,10 +417,10 @@ int USART0_Kbhit() {
 
 ISR(USART_RX_vect) {
 
-	_in_buffer[_tailrx++]=UDR0;
+    _in_buffer[_tailrx++]=UDR0;
 
-	if(_tailrx>MAX_IN_BUFFER)
-		_tailrx=0;
+    if(_tailrx>MAX_IN_BUFFER)
+        _tailrx=0;
 }
 #endif
 
@@ -436,15 +436,15 @@ ISR(USART_RX_vect) {
 
 ISR(USART_TX_vect) {
 
-	_txbusy=0;
-	if(_headtx != _tailtx) {
-		_txbusy=1;
-		UDR0 = _tx_buffer[_headtx++];
-		if(_headtx>MAX_OUT_BUFFER)
-		_headtx=0;
+    _txbusy=0;
+    if(_headtx != _tailtx) {
+        _txbusy=1;
+        UDR0 = _tx_buffer[_headtx++];
+        if(_headtx>MAX_OUT_BUFFER)
+        _headtx=0;
 
-	}
-	
+    }
+    
 }
 #endif
 
@@ -459,23 +459,23 @@ ISR(USART_TX_vect) {
  * Funcion para el envio de un caracter mediante la salida estandar.
  ************************************************************************/
 static int _usart0_putchar(char c, FILE *stream) {
-	if(c=='\n')
-		_usart0_putchar('\r',stream);
-	USART0_PutChar(c);
-	return 0;
+    if(c=='\n')
+        _usart0_putchar('\r',stream);
+    USART0_PutChar(c);
+    return 0;
 }
 /************************************************************************
  * Funcion para la recepcion de un caracter mediante la entrada estandar.
  ************************************************************************/
 static int _usart0_getchar(FILE *stream) {
-	char incomming;
-	while(!USART0_Kbhit());
+    char incomming;
+    while(!USART0_Kbhit());
 
-	if((incomming = USART0_GetChar()) == 13)
-		incomming='\n';
-	_usart0_putchar(incomming,stream);
+    if((incomming = USART0_GetChar()) == 13)
+        incomming='\n';
+    _usart0_putchar(incomming,stream);
 
-	return incomming;
+    return incomming;
 }
 
 #endif
