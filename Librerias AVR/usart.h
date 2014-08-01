@@ -1,12 +1,12 @@
 /***************************************************************************************
  * usart.h
  *
- *		Autor:		Alfredo Orozco de la Paz
+ *	Autor:		Alfredo Orozco de la Paz
  *  	Archivo:	usart.h
  *   	Fecha:		10/07/2014
  *    	e-mail:		alfredoopa@gmail.com
  *
- *		Procesador:	ATmega16, ATmega32
+ *	Procesador:	ATmega16, ATmega32
  *  	Familia:	AVRmega
  *   	Compilador:	GNU avr-gcc
  *
