@@ -60,9 +60,9 @@
  *	|		Inicializa la comunicación estandar (8N1) con el baudaje especificado.
  *	---------------------------------------------------------------------------------
  *	|	void USART_Init2(int baudrate,
- *	|					unsigned char stop_bits,
- *	|					unsigned char parity,
- *	|					unsigned char data_size)
+ *	|				unsigned char stop_bits,
+ *	|				unsigned char parity,
+ *	|				unsigned char data_size)
  *	|
  *	|		Inicializa la comunicacion configurando todos los parametros.
  *	---------------------------------------------------------------------------------
@@ -83,7 +83,7 @@
  *	Ejemplo de uso:
  *
  * 
- *	#define F_CPU 8000000L 
+ * 	#define F_CPU 8000000L 
  *  #define USE_USART_RX_INTERRUPT
  *  #define USE_USART_TX_INTERRUPT
  *  #define USE_USART_STDIO
@@ -161,7 +161,7 @@
 
 
 /************************************************************************
- *						Declaración de Funciones
+ * 						Declaración de Funciones
  ************************************************************************/
 
 void USART_Init(int baudrate);
@@ -265,9 +265,9 @@ void USART_Init(int baudrate) {
  *
  ************************************************************************/
 void USART_Init2(int baudrate,
-				 unsigned char stop_bits,
-				 unsigned char parity,
-				 unsigned char data_size){
+			unsigned char stop_bits,
+			unsigned char parity,
+			unsigned char data_size){
 
 	/*Se programa el valor del baudrate segun la formula del datasheet*/
 	UBRRL = MYUBRR(baudrate);
