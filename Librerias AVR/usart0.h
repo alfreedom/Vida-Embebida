@@ -1,115 +1,117 @@
 /***************************************************************************************
  * usart0.h
  *
- *      Autor:      Alfredo Orozco de la Paz
- *      Archivo:    usart0.h
- *      Fecha:      10/07/2014
- *      e-mail:     alfredoopa@gmail.com
+ *           Autor:  Alfredo Orozco de la Paz
+ *         Archivo:  usart0.h
+ *           Fecha:  10/07/2014
+ *          e-mail:  alfredoopa@gmail.com
  *
- *      Procesador: ATmega48, ATmega88, ATmega168, ATmega328
- *      Familia:    AVRmega
- *      Compilador: GNU avr-gcc
+ *      Procesador:  ATmega48, ATmega88, ATmega168, ATmega328
+ *         Familia:  AVRmega
+ *      Compilador:  GNU avr-gcc
  *
  *  Descripción:
  *
- *  Libreria para el manejo de la USART0 de los microcontroladores
- *  AVR ATmega48/88/168/328 escrita en el compilador GNU avr-gcc.
+ *      Libreria  para  el  manejo  de la  USART0 de los    microcontroladores
+ *      AVR ATmega48, ATmega88, ATmega168 y ATmega328 escrita en el compilador  
+ *      GNU avr-gcc.
  *
- *  La libreria implementa funcines para inicializar la USART0, enviar
- *  y recibir datos por el puerto serie, verificar si hay dato disponible
- *  y enviar cadenas de texto.
+ *      La libreria implementa  funcoines para  inicializar la  USART0, enviar
+ *      y recibir datos por el puerto serie,verificar si hay dato  disponible
+ *      y enviar cadenas de texto.
  *
- *  Cuenta con la posibilidad hacer uso de las interrupciones para el envío y 
- *  recepcion de datos, con lo que los datos recibidos y enviados se almacenan
- *  en un buffer temporarl (FIFO) que serán llenados o vaciados por las funciones
- *  de las interruciones por dato recibido o por transmisor vacío. Para hacer uso
- *  de las interrupciones se usan las definiciones: 
- *      
- *          #define USE_USART0_RX_INTETTUPT // Usa la interrupción de dato disponible en RX
- *          #define USE_USART0_TX_INTERRUPT // Usa la interrupcion de transmisor vacío
- *          #define USE_USART0_INTERRUPTS   // Usa las 2 interrupciónes
+ *      Cuenta con  la  posibilidad  hacer  uso de las interrupciones para el 
+ *      envío y recepcion de datos, con lo que los datos recibidos y enviados 
+ *      se almacenan  en  un  buffer  temporarl  (FIFO)  que serán llenados o 
+ *      vaciados por las funciones de las interruciones  por  dato recibido o 
+ *      por transmisor vacío.  Para hacer uso  de  las interrupciones se usan 
+ *      las definiciones:
+ *
+ *          #define USE_USART0_RX_INTETTUPT  // Usa la interrupción de dato disponible en RX
+ *          #define USE_USART0_TX_INTERRUPT  // Usa la interrupcion de transmisor vacío
+ *          #define USE_USART0_INTERRUPTS    // Usa las 2 interrupciónes
  *
  *      Uso:
  *          #define USE_USART0_RX_INTERRUPT
- *          #include "usart.h"
- *          
- *  El programador puede activar y atender las interrupcions por su cuenta
- *  omitiendo las definiciones anteriormente mencionadas.
+ *          #include "usart0.h"
  *
- *  Para el caso de que se usen interrupciones, se debe tomar en cuenta el
- *  tamaño de los buffer de entrada y salida (FIFO), ya que es espacio en memoria RAM 
- *  y hay que considerar ese espacio en el desarrollo de la aplicacion. Por default
- *  se define un buffer de 128 bytes, que bien puede ser ampliado por el programador 
- *  (a un maximo de 255 para los indices de tipo char) y que es util en microcontroladores 
- *  de mayores capacidades.
+ *      El programador puede activar y atender las interrupcions por su cuenta
+ *      omitiendo las definiciones anteriormente mencionadas.
  *
- *  Se puede hacer uso de la entrada y salida estandar para el envio y
- *  recepcion de datos con la libreria "stdio.h", usando las funciones
- *  printf, scanf, putc, etc. Para el uso de esta propiedad hay que hacer
- *  la definicion "#define USE_USART0_STDIO".
+ *      Para el caso de que se usen interrupciones, se debe tomar en cuenta el
+ *      tamaño de los buffer de entrada y salida (FIFO), ya que es  espacio en 
+ *      memoria RAM y hay que  considerar  ese  espacio en el desarrollo de la 
+ *      aplicacion.  Por  default  se  define un buffer de 128 bytes, que bien 
+ *      puede ser ampliado  por  el  programador  (a un maximo de 255 para los 
+ *      indices de tipo char)  y  que es util en microcontroladores de mayores 
+ *      capacidades.
+ *
+ *      Se puede hacer uso  de  la  entrada  y salida estandar para el envio y
+ *      recepcion de datos con la libreria  "stdio.h",  usando  las  funciones
+ *      printf, scanf, putc, etc. Para el uso de esta propiedad hay  que hacer
+ *      la definicion "#define USE_USART0_STDIO".
  *
  *      Uso:
  *          #define USE_USART0_STDIO
- *          #include "usart.h"
+ *          #include "usart0.h"
  *
  *
- *  Las funciones de la libreria son:
+ *      Las funciones de la libreria son:
  *
- *  ---------------------------------------------------------------------------------
- *  |   void USART0_Init(int baudrate) *
- *  |       Inicializa la comunicación estandar (8N1) con el baudaje especificado.
- *  ---------------------------------------------------------------------------------
- *  |   void USART0_Init2(int baudrate,
- *  |                   unsigned char stop_bits,
- *  |                   unsigned char parity,
- *  |                   unsigned char data_size)
- *  |
- *  |   Inicializa la comunicacion configurando todos los parametros.
- *  ---------------------------------------------------------------------------------
- *  |   void USART0_PutChar(char c)
- *  |       Envia un dato por la USART0.
- *  ---------------------------------------------------------------------------------
- *  |   int USART0_GetChar()
- *  |       Lee un dato recibido en la USART0.
- *  ---------------------------------------------------------------------------------
- *  |   void USART0_PutString(char *str)
- *  |       Envia una cadena de caracteres por la USART0.
- *  ---------------------------------------------------------------------------------
- *  |   int USART0_Kbhit()
- *  |       Determina si hay un dato para ser leido de la USART0, o el numero
- *  |       de datos en el buffer de entrada si se usa interrupcion.
- *  ---------------------------------------------------------------------------------
+ *      ---------------------------------------------------------------------------------
+ *      |   void USART0_Init(int baudrate) *
+ *      |       Inicializa la comunicación estandar (8N1) con el baudaje especificado.
+ *      ---------------------------------------------------------------------------------
+ *      |   void USART0_Init2(int baudrate,
+ *      |                   unsigned char stop_bits,
+ *      |                   unsigned char parity,
+ *      |                   unsigned char data_size)
+ *      |
+ *      |       Inicializa la comunicacion configurando todos los parametros.
+ *      ---------------------------------------------------------------------------------
+ *      |   void USART0_PutChar(char c)
+ *      |       Envia un dato por la USART0.
+ *      ---------------------------------------------------------------------------------
+ *      |   int USART0_GetChar()
+ *      |       Lee un dato recibido en la USART0.
+ *      ---------------------------------------------------------------------------------
+ *      |   void USART0_PutString(char *str)
+ *      |       Envia una cadena de caracteres por la USART0.
+ *      ---------------------------------------------------------------------------------
+ *      |   int USART0_Kbhit()
+ *      |       Determina si hay un dato para ser leido de la USAR, o el numero
+ *      |       de datos en el buffer de entrada si se usa interrupcion.
+ *      ---------------------------------------------------------------------------------
  *
- *  Ejemplo de uso:
+ *      Ejemplo de uso:
  *
- *  
+ * 
+ *      #define F_CPU 8000000L 
+ *      #define USE_USART0_RX_INTERRUPT
+ *      #define USE_USART0_TX_INTERRUPT
+ *      #define USE_USART0_STDIO
  *
- *  #define F_CPU 8000000L 
- *  #define USE_USART0_RX_INTERRUPT
- *  #define USE_USART0_TX_INTERRUPT
- *  #define USE_USART0_STDIO
+ *      #include <avr/io.h>
+ *      #include <util/delay.h>
+ *      #include "usart0.h"
  *
- *  #include <avr/io.h>
- *  #include <util/delay.h>
- *  #include "usart0.h"
+ *      int main(void) 
+ *      {
+ *          USART0_Init(9600);
+ *          sei();
  *
- *  int main(void) 
- *  {
- *      USART0_Init(9600);
- *      sei();
- *
- *      USART0_PutString("Ejemplo ECO con la USART0.\n");
+ *          USART0_PutString("Ejemplo ECO con la USART0.\n");
  *      
- *      while(1){
+ *          while(1){
  *      
- *          if(USART0_Kbhit()){
+ *              if(USART0_Kbhit()){
  *          
- *              printf( "Tecla: %c" , USART0_GetChar() );
- *              _delay_ms(10);
+ *                  printf( "Tecla: %c" , USART0_GetChar() );
+ *                  _delay_ms(10);
  *              
+ *              }
  *          }
  *      }
- *  }
  *
  ***************************************************************************************
  *

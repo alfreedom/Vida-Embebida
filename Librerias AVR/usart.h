@@ -1,29 +1,30 @@
 /***************************************************************************************
  * usart.h
  *
- *      Autor:      Alfredo Orozco de la Paz
- *      Archivo:    usart.h
- *      Fecha:      10/07/2014
- *      e-mail:     alfredoopa@gmail.com
+ *           Autor:  Alfredo Orozco de la Paz
+ *         Archivo:  usart.h
+ *           Fecha:  10/07/2014
+ *          e-mail:  alfredoopa@gmail.com
  *
- *      Procesador: ATmega16, ATmega32
- *      Familia:    AVRmega
- *      Compilador: GNU avr-gcc
+ *      Procesador:  ATmega16, ATmega32
+ *         Familia:  AVRmega
+ *      Compilador:  GNU avr-gcc
  *
  *  Descripción:
  *
- *  Libreria para el manejo de la USART de los microcontroladores
- *  AVR ATmega16 y ATmega32 escrita en el compilador GNU avr-gcc.
+ *      Libreria  para  el  manejo  de la  USART de los    microcontroladores
+ *      AVR  ATmega16  y  ATmega32  escrita  en  el  compilador  GNU avr-gcc.
  *
- *  La libreria implementa funcines para inicializar la USART, enviar
- *  y recibir datos por el puerto serie, verificar si hay dato disponible
- *  y enviar cadenas de texto.
+ *      La libreria implementa  funcoines para  inicializar la  USART, enviar
+ *      y recibir datos por el puerto serie,verificar si hay dato  disponible
+ *      y enviar cadenas de texto.
  *
- *  Cuenta con la posibilidad hacer uso de las interrupciones para el envío y
- *  recepcion de datos, con lo que los datos recibidos y enviados se almacenan
- *  en un buffer temporarl (FIFO) que serán llenados o vaciados por las funciones
- *  de las interruciones por dato recibido o por transmisor vacío. Para hacer uso
- *  de las interrupciones se usan las definiciones:
+ *      Cuenta con  la  posibilidad  hacer  uso de las interrupciones para el 
+ *      envío y recepcion de datos, con lo que los datos recibidos y enviados 
+ *      se almacenan  en  un  buffer  temporarl  (FIFO)  que serán llenados o 
+ *      vaciados por las funciones de las interruciones  por  dato recibido o 
+ *      por transmisor vacío.  Para hacer uso  de  las interrupciones se usan 
+ *      las definiciones:
  *
  *          #define USE_USART_RX_INTETTUPT  // Usa la interrupción de dato disponible en RX
  *          #define USE_USART_TX_INTERRUPT  // Usa la interrupcion de transmisor vacío
@@ -33,82 +34,83 @@
  *          #define USE_USART_RX_INTERRUPT
  *          #include "usart.h"
  *
- *  El programador puede activar y atender las interrupcions por su cuenta
- *  omitiendo las definiciones anteriormente mencionadas.
+ *      El programador puede activar y atender las interrupcions por su cuenta
+ *      omitiendo las definiciones anteriormente mencionadas.
  *
- *  Para el caso de que se usen interrupciones, se debe tomar en cuenta el
- *  tamaño de los buffer de entrada y salida (FIFO), ya que es espacio en memoria RAM
- *  y hay que considerar ese espacio en el desarrollo de la aplicacion. Por default
- *  se define un buffer de 64 bytes, que bien puede ser ampliado por el programador
- *  (a un maximo de 255 para los indices de tipo char) y que es util en microcontroladores
- *  de mayores capacidades.
+ *      Para el caso de que se usen interrupciones, se debe tomar en cuenta el
+ *      tamaño de los buffer de entrada y salida (FIFO), ya que es  espacio en 
+ *      memoria RAM y hay que  considerar  ese  espacio en el desarrollo de la 
+ *      aplicacion.  Por  default  se  define  un buffer de 64 bytes, que bien 
+ *      puede ser ampliado  por  el  programador  (a un maximo de 255 para los 
+ *      indices de tipo char)  y  que es util en microcontroladores de mayores 
+ *      capacidades.
  *
- *  Se puede hacer uso de la entrada y salida estandar para el envio y
- *  recepcion de datos con la libreria "stdio.h", usando las funciones
- *  printf, scanf, putc, etc. Para el uso de esta propiedad hay que hacer
- *  la definicion "#define USE_USART_STDIO".
+ *      Se puede hacer uso  de  la  entrada  y salida estandar para el envio y
+ *      recepcion de datos con la libreria  "stdio.h",  usando  las  funciones
+ *      printf, scanf, putc, etc. Para el uso de esta propiedad hay  que hacer
+ *      la definicion "#define USE_USART_STDIO".
  *
  *      Uso:
  *          #define USE_USART_STDIO
  *          #include "usart.h"
  *
  *
- *  Las funciones de la libreria son:
+ *      Las funciones de la libreria son:
  *
- *  ---------------------------------------------------------------------------------
- *  |   void USART_Init(int baudrate) *
- *  |       Inicializa la comunicación estandar (8N1) con el baudaje especificado.
- *  ---------------------------------------------------------------------------------
- *  |   void USART_Init2(int baudrate,
- *  |                   unsigned char stop_bits,
- *  |                   unsigned char parity,
- *  |                   unsigned char data_size)
- *  |
- *  |       Inicializa la comunicacion configurando todos los parametros.
- *  ---------------------------------------------------------------------------------
- *  |   void USART_PutChar(char c)
- *  |       Envia un dato por la USART.
- *  ---------------------------------------------------------------------------------
- *  |   int USART_GetChar()
- *  |       Lee un dato recibido en la USART.
- *  ---------------------------------------------------------------------------------
- *  |   void USART_PutString(char *str)
- *  |       Envia una cadena de caracteres por la USART.
- *  ---------------------------------------------------------------------------------
- *  |   int USART_Kbhit()
- *  |       Determina si hay un dato para ser leido de la USAR, o el numero
- *  |       de datos en el buffer de entrada si se usa interrupcion.
- *  ---------------------------------------------------------------------------------
+ *      ---------------------------------------------------------------------------------
+ *      |   void USART_Init(int baudrate) *
+ *      |       Inicializa la comunicación estandar (8N1) con el baudaje especificado.
+ *      ---------------------------------------------------------------------------------
+ *      |   void USART_Init2(int baudrate,
+ *      |                   unsigned char stop_bits,
+ *      |                   unsigned char parity,
+ *      |                   unsigned char data_size)
+ *      |
+ *      |       Inicializa la comunicacion configurando todos los parametros.
+ *      ---------------------------------------------------------------------------------
+ *      |   void USART_PutChar(char c)
+ *      |       Envia un dato por la USART.
+ *      ---------------------------------------------------------------------------------
+ *      |   int USART_GetChar()
+ *      |       Lee un dato recibido en la USART.
+ *      ---------------------------------------------------------------------------------
+ *      |   void USART_PutString(char *str)
+ *      |       Envia una cadena de caracteres por la USART.
+ *      ---------------------------------------------------------------------------------
+ *      |   int USART_Kbhit()
+ *      |       Determina si hay un dato para ser leido de la USAR, o el numero
+ *      |       de datos en el buffer de entrada si se usa interrupcion.
+ *      ---------------------------------------------------------------------------------
  *
- *  Ejemplo de uso:
+ *      Ejemplo de uso:
  *
  * 
- *  #define F_CPU 8000000L 
- *  #define USE_USART_RX_INTERRUPT
- *  #define USE_USART_TX_INTERRUPT
- *  #define USE_USART_STDIO
+ *      #define F_CPU 8000000L 
+ *      #define USE_USART_RX_INTERRUPT
+ *      #define USE_USART_TX_INTERRUPT
+ *      #define USE_USART_STDIO
  *
- *  #include <avr/io.h>
- *  #include <util/delay.h>
- *  #include "usart.h"
+ *      #include <avr/io.h>
+ *      #include <util/delay.h>
+ *      #include "usart.h"
  *
- *  int main(void) 
- *  {
- *      USART_Init(9600);
- *      sei();
+ *      int main(void) 
+ *      {
+ *          USART_Init(9600);
+ *          sei();
  *
- *      USART_PutString("Ejemplo ECO con la USART.\n");
+ *          USART_PutString("Ejemplo ECO con la USART.\n");
  *      
- *      while(1){
+ *          while(1){
  *      
- *          if(USART_Kbhit()){
+ *              if(USART_Kbhit()){
  *          
- *              printf( "Tecla: %c" , USART_GetChar() );
- *              _delay_ms(10);
+ *                  printf( "Tecla: %c" , USART_GetChar() );
+ *                  _delay_ms(10);
  *              
+ *              }
  *          }
  *      }
- *  }
  *
  ***************************************************************************************
  *

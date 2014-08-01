@@ -1,9 +1,9 @@
  /**************************************************************************************
- *  Ejemplo de Puertos 2
+ *  Hola Mundo!
  *  
- *       Archivo:  IO_1.c
+ *       Archivo:  hola mundo.c
  *         Autor:  Alfredo Orozco de la Paz
- *         Fecha:  10/12/2013
+ *         Fecha:  8/12/2013
  *        e-mail:  alfredoopa@gmail.com
  *
  *    Procesador:  ATmega16
@@ -13,8 +13,7 @@
  *   
  *   Descripción:
  * 
- *      Enciende y apaga leds en los puertos A,B y C con diferentes 
- *      patrones.
+ *     Enciende y apaga leds en el puerto B con retarods de 1 segundo.
  *   
  ***************************************************************************************
  *
@@ -40,37 +39,21 @@
  *
  *
  ***************************************************************************************/
+#define F_CPU 8000000L
 
-
-#define F_CPU 8000000L  //definimos la frecuencia del reloj para la librería delay y otras librerias.
-
-#include <avr/io.h>     //incluimos la libreria para los registros de uc.
-#include <util/delay.h> //libreria de retardos.
-
-/* Inicializa los puertos*/
-void Init_System() {
-
-    DDRA = 0xFF;
-    DDRB = 0b11111111;
-    DDRC = _BV(PD0) | _BV(PD1) | _BV(PD2) | _BV(PD3) | _BV(PD4) | _BV(PD5) | _BV(PD6) | _BV(PD7);
-
-    PORTA = PORTB = PORTC = 0x00;
-}
+#include <avr/io.h>
+#include <util/delay.h>
 
 int main(void)
 {
-   
-    Init_System();
+    DDRB = 0xFF;
+    PORTB = 0;
 
-    PORTA = 0b10101010;
-    PORTB = _BV(PD0) | _BV(PD1) | _BV(PD2) | _BV(PD3);
-    PORTC = 1;
-
-    while(1)            //ciclo infinito.
+    while(1)
     {
-        PORTA = ~PORTA;
-        PORTB ^= PORTB;
-        PORTC = PORTC ? PORTC << 1 : 1;
+        PORTB = 0xFF;
+        _delay_ms(1000);
+        PORTB = 0;
         _delay_ms(1000);
     }
 
