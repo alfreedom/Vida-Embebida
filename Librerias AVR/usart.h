@@ -69,7 +69,8 @@
  *      |       Inicializa la comunicacion configurando todos los parametros.
  *      ---------------------------------------------------------------------------------
  *      |   void USART_PutChar(char c)
- *      |       Envia un dato por la USART.
+ *      |       Envía un dato por la USART o lo inserta en el buffer de salida si se 
+        |       usa interrupción.
  *      ---------------------------------------------------------------------------------
  *      |   int USART_GetChar()
  *      |       Lee un dato recibido en la USART.
