@@ -230,6 +230,7 @@ int USART_Kbhit();
  *
  * Recibe:
  *      -baudrate: Velocidad en baudios a la que trabajará la USART.
+ * 
  *
  ************************************************************************/
 void USART_Init(int baudrate) {
