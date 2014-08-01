@@ -1,14 +1,14 @@
 /***************************************************************************************
  * usart0.h
  *
- *		 Autor:	alfredo
- *	   Archivo:	usart0.h
- *		 Fecha: 10/07/2014
- *		e-mail:	alfredoopa@gmail.com
+ *		Autor:		Alfredo Orozco de la Paz
+ *  	Archivo:	usart0.h
+ *   	Fecha:		10/07/2014
+ *    	e-mail:		alfredoopa@gmail.com
  *
- *	Procesador: ATmega48, ATmega88, ATmega168, ATmega328
- *     Familia: AVRmega
- *	Compilador: GNU avr-gcc
+ *		Procesador:	ATmega48, ATmega88, ATmega168, ATmega328
+ * 		Familia:	AVRmega
+ *   	Compilador:	GNU avr-gcc
  *
  *  Descripción:
  *
@@ -39,7 +39,7 @@
  *	Para el caso de que se usen interrupciones, se debe tomar en cuenta el
  *	tamaño de los buffer de entrada y salida (FIFO), ya que es espacio en memoria RAM 
  *	y hay que considerar ese espacio en el desarrollo de la aplicacion. Por default
- *	se define un buffer de 64 bytes, que bien puede ser ampliado por el programador 
+ *	se define un buffer de 128 bytes, que bien puede ser ampliado por el programador 
  *	(a un maximo de 255 para los indices de tipo char) y que es	util en microcontroladores 
  *	de mayores capacidades.
  *
@@ -59,23 +59,23 @@
  *	|	void USART0_Init(int baudrate) *
  *	|		Inicializa la comunicación estandar (8N1) con el baudaje especificado.
  *	---------------------------------------------------------------------------------
- *	|	void USART0_Init2(int baudrate,
- *	|					 unsigned char stop_bits,
- *	|					 unsigned char parity,
- *	|					 unsigned char data_size)
+ * 	|	void USART0_Init2(int baudrate,
+ *	|					unsigned char stop_bits,
+ *	|					unsigned char parity,
+ *	|					unsigned char data_size)
  *	|
- *	|		Inicializa la comunicacion configurando todos los parametros.
+ *	|	Inicializa la comunicacion configurando todos los parametros.
  *	---------------------------------------------------------------------------------
- *	|	void USART0_PutChar(unsigned char byte)
+ *	|	void USART0_PutChar(char c)
  *	|		Envia un dato por la USART0.
  *	---------------------------------------------------------------------------------
- *	|	unsigned char USART0_GetChar()
+ *	|	int USART0_GetChar()
  *	|		Lee un dato recibido en la USART0.
  *	---------------------------------------------------------------------------------
  *	|	void USART0_PutString(char *str)
  *	|		Envia una cadena de caracteres por la USART0.
  *	---------------------------------------------------------------------------------
- *	|	unsigned char USART0_Kbhit()
+ *	|	int USART0_Kbhit()
  *	|		Determina si hay un dato para ser leido de la USART0, o el numero
  *	|		de datos en el buffer de entrada si se usa interrupcion.
  *	---------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ void USART0_Init2(int baudrate,unsigned char stop_bits, unsigned char parity,uns
 void USART0_PutChar(char byte);
 int USART0_GetChar();
 void USART0_PutString(char *str);
-char USART0_Kbhit();
+int USART0_Kbhit();
 
 
 /************************************************************************
@@ -185,18 +185,18 @@ char USART0_Kbhit();
 
 #if defined(USE_USART0_RX_INTERRUPT)
 	#include <avr/interrupt.h>
-	#define MAX_IN_BUFFER 64
+	#define MAX_IN_BUFFER 128
 	volatile char _rx_buffer[MAX_IN_BUFFER];
-	volatile unsigned char _headrx;
-	volatile unsigned char _tailrx;
+	volatile int _headrx;
+	volatile int _tailrx;
 #endif
 
 #if defined(USE_USART0_TX_INTERRUPT) 
 	#include <avr/interrupt.h>
-	#define MAX_OUT_BUFFER 64
+	#define MAX_OUT_BUFFER 128
 	volatile char _tx_buffer[MAX_OUT_BUFFER];
-	volatile unsigned char _headtx;
-	volatile unsigned char _tailtx;
+	volatile unsigned int _headtx;
+	volatile unsigned int _tailtx;
 	volatile unsigned char _txbusy;
 #endif
 
@@ -394,7 +394,7 @@ void USART0_PutString(char *str) {
  * recepcion o 0 si aun no hay dato listo.
  *
  ************************************************************************/
-char USART0_Kbhit() {
+int USART0_Kbhit() {
 
 #if defined(USE_USART0_RX_INTERRUPT)
 	return _tailrx - _headrx;
