@@ -70,7 +70,8 @@
  *      |       Inicializa la comunicacion configurando todos los parametros.
  *      ---------------------------------------------------------------------------------
  *      |   void USART0_PutChar(char c)
- *      |       Envia un dato por la USART0.
+ *      |       Envía un dato por la USART0 o lo inserta en el buffer de salida si se 
+        |       usa interrupción.
  *      ---------------------------------------------------------------------------------
  *      |   int USART0_GetChar()
  *      |       Lee un dato recibido en la USART0.
