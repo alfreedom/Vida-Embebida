@@ -161,7 +161,7 @@
  * Macro calcular el valor de los registros generadores del
  * baudrate segun la formula del datasheet.
  ************************************************************************/
-#define MYUBRR(BAUD) (F_CPU/16/(BAUD)-1)
+#define MYUBRR(BAUD) (F_CPU/(BAUD*8L)-1)/2 //Mejor formula que (F_CPU/16/(BAUD)-1)
 
 
 
