@@ -283,14 +283,14 @@ void USART0_Init2(int baudrate,
     /*Habilitamos el transmisor y el receptor*/
     UCSR0B = _BV(RXEN0) | _BV(TXEN0);
 
-#ifdef defined(USE_USART0_RX_INTERRUPT) 
+#if defined(USE_USART0_RX_INTERRUPT)
     UCSR0B |= _BV(RXCIE0);
-    _head=0;
-    _tail=0;
+    _headrx=0;
+    _tailrx=0;
 #endif
 
 #if defined(USE_USART0_TX_INTERRUPT)
-    UCSRB |= _BV(TXCIE0);
+    UCSR0B |= _BV(TXCIE0);
     _headtx=0;
     _tailtx=0;
     _txbusy=0;
@@ -311,7 +311,7 @@ void USART0_Init2(int baudrate,
  *
  *      - byte: Dato a enviar por el puerto serie.
  ************************************************************************/
-void USART0_PutChar(char byte) {
+void USART0_PutChar(char c) {
 
 #if defined(USE_USART0_TX_INTERRUPT)
     
@@ -323,21 +323,22 @@ void USART0_PutChar(char byte) {
     }
     else {
 
-        UCSRB &= ~_BV(TXCIE0);
+        UCSR0B &= ~_BV(TXCIE0);
 
         _tx_buffer[_tailtx++] = c;
 
         if(_tailtx>MAX_OUT_BUFFER)
             _tailtx=0;
 
-        UCSRB |= _BV(TXCIE0);
+        UCSR0B |= _BV(TXCIE0);
 
     }
     
 #else
     while (!(UCSR0A & _BV(UDRE0)));
-    UDR0 = byte;
+    UDR0 = c;
 #endif
+
 }
 
 /************************************************************************
@@ -358,7 +359,7 @@ int USART0_GetChar() {
 
     char ret=-1;
     if(_headrx != _tailrx) {
-        ret=_in_buffer[_headrx++];
+        ret=_rx_buffer[_headrx++];
         if(_headrx>MAX_IN_BUFFER)
         _headrx=0;      
     }
@@ -421,8 +422,7 @@ int USART0_Kbhit() {
 
 ISR(USART_RX_vect) {
 
-    _in_buffer[_tailrx++]=UDR0;
-
+    _rx_buffer[_tailrx++]=UDR0;kkkk
     if(_tailrx>MAX_IN_BUFFER)
         _tailrx=0;
 }
