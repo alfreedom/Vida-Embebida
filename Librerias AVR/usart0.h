@@ -169,8 +169,8 @@
  *                      Declaración de Funciones    
  ************************************************************************/
 
-void USART0_Init(int baudrate);
-void USART0_Init2(int baudrate,unsigned char stop_bits, unsigned char parity,unsigned char data_size);
+void USART0_Init(long baudrate);
+void USART0_Init2(long baudrate,unsigned char stop_bits, unsigned char parity,unsigned char data_size);
 void USART0_PutChar(char byte);
 int USART0_GetChar();
 void USART0_PutString(char *str);
@@ -234,7 +234,7 @@ int USART0_Kbhit();
  *      -baudrate: Velocidad en baudios a la que trabajará la USART0.
  *
  ************************************************************************/
-void USART0_Init(int baudrate) {
+void USART0_Init(long baudrate) {
 
     USART0_Init2(baudrate, USART0_STOP_BITS_1,
                 USART0_PARITY_OFF,
@@ -269,7 +269,7 @@ void USART0_Init(int baudrate) {
  *                          USART0_DATA_SIZE_8      -   Tamaño de palabra de 8 bits
  *
  ************************************************************************/
-void USART0_Init2(int baudrate,
+void USART0_Init2(long baudrate,
                  unsigned char stop_bits,
                  unsigned char parity,
                  unsigned char data_size) {
