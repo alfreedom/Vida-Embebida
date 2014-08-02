@@ -211,9 +211,9 @@ int USART0_Kbhit();
  ************************************************************************/
 #if defined(USE_USART0_STDIO)
     #include <stdio.h>
-    static int _usart_putchar(char c, FILE *stream);
-    static int _usart_getchar(FILE *stream);
-    static FILE _myiostream = FDEV_SETUP_STREAM(_usart_putchar, _usart_getchar, _FDEV_SETUP_RW);
+    static int _usart0_putchar(char c, FILE *stream);
+    static int _usart0_getchar(FILE *stream);
+    static FILE _myiostream = FDEV_SETUP_STREAM(_usart0_putchar, _usart0_getchar, _FDEV_SETUP_RW);
 #endif
 
 
