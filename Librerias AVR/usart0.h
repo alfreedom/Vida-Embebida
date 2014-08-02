@@ -422,7 +422,7 @@ int USART0_Kbhit() {
 
 ISR(USART_RX_vect) {
 
-    _rx_buffer[_tailrx++]=UDR0;kkkk
+    _rx_buffer[_tailrx++]=UDR0;
     if(_tailrx>MAX_IN_BUFFER)
         _tailrx=0;
 }
