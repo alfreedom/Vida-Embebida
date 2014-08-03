@@ -1,5 +1,5 @@
 /**************************************************************************************
- *  Ejemplo del ADC del ATmega16 con interrupciones
+ *  Ejemplo del ADC del ATmega16 con conversión manual
  *  
  *       Archivo:  adcmega16-2.c
  *         Autor:  Alfredo Orozco de la Paz
