@@ -11,7 +11,9 @@
  *  
  *      Uso del Timer/Counter0 en modo CTC para generar una onda cuadrada  por el
  *      pin OC0 de una frecuencia de 38kHz para controlar un led infrarrojo cone-
- *      ctado a este pin, con el fin de simular un control remoto infrarrojo.
+ *      ctado a este pin, con el fin de simular un control remoto infrarrojo. El led
+ *      enciende o apaga cada que se presiona un push button conectado a la entrada
+ *      INT0.
  *
  ***************************************************************************************
  *
