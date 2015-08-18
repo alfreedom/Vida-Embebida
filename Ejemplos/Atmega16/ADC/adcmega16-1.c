@@ -1,7 +1,7 @@
 /**************************************************************************************
  *  Ejemplo del ADC del ATmega16 con conversión manual
  *  
- *       Archivo:  adcmega16-2.c
+ *       Archivo:  adcmega16-1.c
  *         Autor:  Alfredo Orozco de la Paz
  *         Fecha:  2/08/2014
  *    Procesador:  ATmega16 ATmega32
@@ -16,13 +16,7 @@
  *   
  ***************************************************************************************
  *
- *    Copyright:
- *
-<<<<<<< HEAD
  *        Copyrigth© 2014
-=======
- *        Copyrigth© 2013
->>>>>>> f0ee67e0f18cf41141dbeb81be02813fd1fe6fb6
  *        Alfredo Orozco        
  *        e-mail:  alfredoopa@gmail.com
  *
