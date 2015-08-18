@@ -33,13 +33,7 @@
  *
  ***************************************************************************************
  *
- *    Copyright:
- *
-<<<<<<< HEAD
  *        Copyrigth© 2014
-=======
- *        Copyrigth© 2013
->>>>>>> f0ee67e0f18cf41141dbeb81be02813fd1fe6fb6
  *        Alfredo Orozco
  *        e-mail:  alfredoopa@gmail.com
  *
