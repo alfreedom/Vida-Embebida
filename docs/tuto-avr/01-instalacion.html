@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>AVR 01 - Instalación</title>
+
+		<link rel="stylesheet" href="assets/css/reveal.css">
+		<link rel="stylesheet" href="assets/css/theme/night.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="assets/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'assets/css/print/pdf.css' : 'assets/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		
+		<!-- Estilos para las presentaciones -->
+		<link rel="stylesheet" href="assets/css/fredstyle.css">
+		
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<!-- INICIO Slide 0 -->
+				<section>
+					<h2>Programación de Micros <span class="theme-color">AVR</span> en Linux</h2> 
+					<img width="60%" src="assets/img/linux+avr3.png" alt="">
+				</section>
+				<!-- FIN Slide 0 -->
+
+				<!-- INICIO Slide 1 -->
+				<section >
+					 <h2>Instalación de Herramientas</h2>
+					<p class="theme-color">Herramientas de Software y Hardware</p>
+				</section>
+				<!-- FIN Slide 1 -->
+
+				<!-- INICIO Slide 2 -->
+				<section>
+
+					<!-- INICIO Slide 3 -->
+					<section>
+						<h2>Software</h2>
+						<ul>
+							<li>Sistema operativo Linux</li>
+							<li>Compilador y utilidades (avr-gcc)</li>
+							<li>Programador (avrdude)</li>
+							<li>Editor de Texto (Visual Studio Code)</li>
+							<li>Programa para crear proyectos APOS (AVR Project Open Source)</li>
+						</ul>
+					</section>
+					<!-- FIN Slide 3 -->
+					
+					<!-- INICIO Slide 4 -->
+					<section>
+						<h3>Sistema operativo Linux</h3>
+						<p class="theme-color">El sistema operativo linux de su agrado</p>
+						<br>
+						<img width="70%" src="assets/img/linuxes.png" alt="">
+					</section>
+					<!-- FIN Slide 4 -->
+					
+					<!-- INICIO Slide 5 -->
+					<section>
+						<h3>Compilador</h3>
+						<p class="theme-color">Compilador avr-gcc, binutils-avr y avr-libc</p>
+						<br> Debian y derivados:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+							$ sudo apt-get install <span style="color:darkseagreen"> gcc-avr binutils-avr avr-libc</span>
+						</code></pre> Fedora y RedHat:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+							$ sudo yum install <span style="color:darkseagreen"> gcc-avr binutils-avr avr-libc</span>
+						</code></pre> Probar la instalación:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+							$ <span style="color:darkseagreen"></span>avr-gcc</span> --version
+						</code></pre>
+					</section>
+					<!-- FIN Slide 5 -->
+					
+					<!-- INICIO Slide 6 -->
+					<section>
+						<h3>Programador</h3>
+						<p class="theme-color">Software para programar los micros AVR</p>
+						<br> Debian y derivados:
+						<pre style="text-align: center;"><code class="bash"  data-trim data-noescape>
+									$ sudo apt-get install <span style="color:darkseagreen">avrdude</span>
+								</code></pre> Fedora y RedHat:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+									$ sudo yum install <span style="color:darkseagreen">avrdude</span>
+							</code></pre> Probar la instalación:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+									$ <span style="color:darkseagreen">avrdude</span> -v
+							</code></pre>
+					</section>
+					<!-- FIN Slide 6 -->
+
+					<!-- INICIO Slide 7 -->
+					<section>
+						<h3>Editor de Texto</h3>
+						<p class="theme-color">Para mostrar los ejemplos de programación se utiliza el editor Visual Studio Code, que cuenta con una terminal integrada</p>
+						<br> Descarga desde la página oficial:
+						<p>
+							<a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>
+						</p>
+						<br> Probar la instalación:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+							$ <span style="color:darkseagreen">code</span> -v
+						</code></pre>
+					</section>
+					<!-- FIN Slide 7 -->
+
+					<!-- INICIO Slide 8 -->
+					<section>
+						<h3>Programa APOS</h3>
+						<p class="theme-color">Software para crear plantillas de proyectos
+							<br>para microcontroladores AVR</p>
+						<br> Instalación:
+						<pre style="text-align: left;"><code class="bash" data-trim data-noescape>
+									$ git clone https://github.com/alfreedom/apos.git
+									$ cd <span style="color:rgb(138, 144, 179)">apos</span>
+									$ make && sudo make install
+							</code></pre> Probar la instalación:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+									$ <span style="color:darkseagreen">apos</span> -v
+							</code></pre>
+					</section>
+					<!-- FIN Slide 8 -->
+
+				</section>
+				<!-- FIN Slide 2 -->
+
+				<!-- INICIO Slide 9 -->
+				<section>
+					<!-- INICIO Slide 10 -->
+					<section>
+						<h2>Hardware</h2>
+						<ul>
+							<li>Programador USB</li>
+							<li>Microcontrolador AVR</li>
+							<li>Tarjeta de desarrollo basada en AVR</li>
+						</ul>
+					</section>
+					<!-- FIN Slide 10 -->					
+
+					<!-- INICIO Slide 11 -->					
+					<section>
+						<h3>Programador USB</h3>
+						<p class="theme-color">Existen gran variedad de programadores USB, desde los profecionales hasta los OpenSource</p>
+						<br>
+						<ul>
+							<li>AVRdragon</li>
+							<li>AVRISP MKii</li>
+							<li>USBasp</li>
+							<li>USBTiny</li>
+							<li>USBTiny ISP</li>
+						</ul>
+					</section>
+					<!-- FIN Slide 11 -->
+					
+					<!-- INICIO Slide 12 -->
+					<section>
+						<h3>Instalación del Programador </h3>
+						<br>
+						<p>Ejecutar en una terminal:</p>
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+							$ sudo adduser <span style="color:darkseagreen">USUARIO</span> dialout
+						</code></pre>
+						<p class="small-text">Este comando agrega al usuario
+							<span style="color:darkseagreen">USUARIO</span> al grupo dialout</p>
+						<br>
+						<p>Crear y editar las reglas de los programadores</p>
+						<pre style="text-align: center;">
+							<code class="bash" data-trim data-noescape>
+								$ sudo touch /etc/udev/rules.d/99-avr.rules
+								$ sudo code  /etc/udev/rules.d/99-avr.rules
+							</code>
+						</pre>
+					</section>
+					<!-- FIN Slide 12 -->
+
+					<!-- INICIO Slide 13 -->
+					<section>
+						<p>Agregar las reglas de los programadores</p>
+					
+						<pre style="text-align: left; font-size: 25px;">
+							<code class="bash" data-trim >
+								# Programmers for avrdude
+								ATTR{idVendor}=="03eb", ATTR{idProduct}=="2104", GROUP="dialout", MODE="0660" # AVRISP mkII
+								ATTR{idVendor}=="03eb", ATTR{idProduct}=="2107", GROUP="dialout", MODE="0660" # AVR-Dragon
+								ATTR{idVendor}=="03eb", ATTR{idProduct}=="2103", GROUP="dialout", MODE="0660" # JTAG ICE mkII
+								ATTR{idVendor}=="03eb", ATTR{idProduct}=="2106", GROUP="dialout", MODE="0660" # STK600
+								ATTR{idVendor}=="16c0", ATTR{idProduct}=="05dc", GROUP="dialout", MODE="0660" # USBASP von www.fischl.de
+								ATTR{idVendor}=="03eb", ATTR{idProduct}=="2ffa", GROUP="dialout", MODE="0660" # AT90USB
+								ATTR{idVendor}=="10c4", ATTR{idProduct}=="ea60", GROUP="dialout", MODE="0660" # AVR910
+								ATTR{idVendor}=="03eb", ATTR{idProduct}=="2105", GROUP="dialout", MODE="0660" # AVR ONE
+								ATTR{idVendor}=="03eb", ATTR{idProduct}=="210d", GROUP="dialout", MODE="0660" # Atmel XPLAIN CDC Gateway
+								ATTR{idVendor}=="03eb", ATTR{idProduct}=="2ffb", GROUP="dialout", MODE="0660" # AT90USB AVR DFU bootloader
+								ATTR{idVendor}=="1781", ATTR{idProduct}=="0c9f", GROUP="dialout", MODE="0660" # usbtiny
+							</code>
+						</pre>
+						<a href="assets/99-avr.rules" class="small-text" target="_blank">
+							<img src="assets/img/download.png" style="position:relative; top:12px; background: none; border: none; margin: 0;" alt=""> Archivo 99-avr.rules</a>
+					</section>
+					<!-- FIN Slide 13 -->
+
+					<!-- INICIO Slide 14 -->
+					<section>
+						<p>Actualizar las reglas con los comandos</p>
+						<pre style="text-align: left; font-size: 25px;">
+									<code class="bash" data-trim data-noescape>
+										 $ sudo udevadm control --reload 
+										 $ sudo udevadm trigger --action=add
+									</code>
+								</pre>
+					</section>
+					<!-- FIN Slide 14 -->
+
+				</section>
+				<!-- FIN Slide 9 -->
+
+				<!-- INICIO Slide 15 -->
+				<section >
+					<h2>Siguiente capítulo</h2>
+					<h5>Creación de un proyecto:</h5>
+					<h5>Hola Mundo en AVR</h5>
+					<br>
+					<a href="02-hola-mundo.html">Ir al capitulo 2</a>
+				</section>
+				<!-- FIN Slide 15 -->
+			</div>
+		</div>
+
+		<script src="assets/js/head.min.js"></script>
+		<script src="assets/js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				loop: false,
+				mouseWheel: true,
+				rollingLinks: true,
+				theme: Reveal.getQueryHash().theme || 'default',
+				dependencies: [
+					{ src: 'assets/plugin/markdown/marked.js' },
+					{ src: 'assets/plugin/markdown/markdown.js' },
+					{ src: 'assets/plugin/notes/notes.js', async: true },
+					{ src: 'assets/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+.theme-color {
+    color: #e7ad52;
+}
+
+.small-text {
+    font-size: 24px !important;
+    font-weight: bold;
+}
+
+.medium-text {
+    font-size: 34px !important;
+    font-weight: bold;
+}
+
+.description {
+    text-align: justify;
+}
+
+.bash-command {
+    text-align: center !important;
+}
+
+.highlight{
+		color: darkseagreen;
+		font-weight: bold;
+}
+
+.highlight-red {
+	color: deeppink;
+}
+
+.highlight-cyan {
+	color: cyan;
+}
+.ccode {
+	text-align: left;
+	font-size: 30px
+}
