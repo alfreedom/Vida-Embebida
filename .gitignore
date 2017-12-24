@@ -1,0 +1,6 @@
+# Binaries IDES and output build files
+.idea
+.dist
+*.hex
+*.o
+*.elf
