@@ -3,7 +3,7 @@
 #### C++ Library for control the I2C module of the AVR microcontroller
 
 ---
-Notes: you need compile with the command avr-g++ instead of avr-gcc.
+#### Notes: you need compile with the command avr-g++ instead of avr-gcc.
 
 This library lets you control the i2c comunnication in master mode on the AVR microcontrollers. Provides methods for send start and stop i2c conditions, write data and read data.
 
