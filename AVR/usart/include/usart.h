@@ -102,7 +102,7 @@ class Usart{
 		  volatile uint8_t * udr
 		  );
 
-    void begin(uint32_t baudrate);
+    void init(uint32_t baudrate);
 
     void print(char c);
     void print(int num);

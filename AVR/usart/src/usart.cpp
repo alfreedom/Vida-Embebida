@@ -73,7 +73,7 @@ _UCSRB(ucsrb),_UCSRC(ucsrc),_UDR(udr)
 	_is_write = 0;
 }
 
-void Usart::begin(uint32_t baud) {
+void Usart::init(uint32_t baud) {
 
   #if defined ( U2X0 )
   baud = UBRR_VALUE2X(baud);

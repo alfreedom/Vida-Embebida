@@ -13,24 +13,26 @@
  * 
  ***************************************************************************************/
 
-#ifndef _I2C_H_
-#define _I2C_H_
+#ifndef _I2C_MASTER_H_
+#define _I2C_MASTER_H_
 
 #include <stdint.h>
 #include <util/twi.h>
 
 #define SCL_CLOCK  100000L
 
-class I2C {
+class I2CMaster {
 public:
-    I2C();
-    void begin(uint8_t address);
+    I2CMaster();
+    void init(uint8_t address = 0, long scl_clock = SCL_CLOCK);
     uint8_t start();
     void stop(void);
     uint8_t write(uint8_t data);
-	uint8_t read(uint8_t* data, uint8_t count = 1);
+    uint8_t write(uint8_t* data, uint16_t count);
+    uint8_t read(uint8_t* data, uint16_t count = 1);
+    uint8_t read();
 private:
     uint8_t address;
 };
 
-#endif
+#endif // _I2C_MASTER_H_

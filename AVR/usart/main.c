@@ -1,10 +1,10 @@
 /******************************************************
  * main.c
  *
- * Program Name:  usart-lib-example
+ * Program Name:  usart-example
  *       Author:  Alfredo Orozco
  *         Date:  DATE
- *      License:  MTI
+ *      License:  MIT
  *
  * Description:
  * 	Use the usart-lib library to send and receive data
@@ -34,7 +34,8 @@ int main()
 	// Print ascii values and codes
 	for (size_t i = 0; i <= 255; i++)
 	{
-		for (size_t j = 0; j < 8; j++)
+		// Generate binary string
+		for (size_t j = 0; j < 9; j++)
 			s[j] = (i<<j) & 0x80 ? '1' : '0';
 
 		// Format the string whit the nomber
