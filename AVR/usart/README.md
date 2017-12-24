@@ -3,9 +3,9 @@
 ####  C++ Library for control the USART module of the AVR microcontroller
 
 ---
-#### ## Note 1: you need compile with the command "avr-g++" instead of "avr-gcc". 
+#### Note 1: you need compile with the command "avr-g++" instead of "avr-gcc". 
 
-#### ## Note 2: Don't forget add the LDFLAGS "-Wl,-u,vfprintf -lprintf_flt -lm" to the compiler, this allow use the printf and derivated functions with float numbers.
+#### Note 2: Don't forget add the LDFLAGS "-Wl,-u,vfprintf -lprintf_flt -lm" to the compiler, this allow use the printf and derivated functions with float numbers.
 
 This library lets you control the serial comunnication with the USART/UART module on the AVR microcontrollers. Provides methods for initialization, write and read data in many formats.
 
