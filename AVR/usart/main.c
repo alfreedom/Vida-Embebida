@@ -18,7 +18,7 @@
 void AVRInit()
 {
 	 DDRB = 0xFF;			// PORTB as Output
-	 Serial.begin(115200);	// Initialize serial to 115200 baud
+	 Serial.init(115200);	// Initialize serial to 115200 baud
 }	
 
 int main()
