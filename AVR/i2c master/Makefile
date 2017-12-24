@@ -1,13 +1,13 @@
 # Name: Makefile
-# Author:    <insert your name here>
-# Copyright: <insert your copyright message here>
-# License:   <insert your license reference here>
+# Author:    Alfredo Orozco de la Paz
+# Copyright: ©2017 Alfredo Orozco
+# License:   MIT
 
 PROJECT_NAME = i2c-master
 DEVICE       = atmega32
 CLOCK        = 16000000
 PROGRAMMER   = -c usbtiny -P usb
-FUSES        = -U hfuse:w:0xD9:m -U lfuse:w:0xDE:m #-U efuse:w:0xFF:m
+FUSES        = #-U hfuse:w:0xD9:m -U lfuse:w:0xDE:m #-U efuse:w:0xFF:m
 AVRDUDE      = avrdude $(PROGRAMMER) -p $(DEVICE)
 
 OBJECT_FILES = main.o
