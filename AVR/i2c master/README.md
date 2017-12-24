@@ -16,11 +16,11 @@ The use of the library is very easy, only you need to copy the i2c_master.h and 
 #### void I2CMaster::init ( uint8_t address, long scl_clock )
 
 Initialize the i2c hardware in master mode whit the specific address and the SCL frequency (in Hz).
-The address must contains the RD/WR bit (bit 0), for example if the address register of a device is 01011100, the addres passed to the function will be 0x5C (92 
+The address must contains the RD/WR bit (bit 0), for example if the address register of a device is 01011100, the addres passed to the function will be 0x5C (92 decimal)
 
 	  7   6   5   4   3   2   1     0
 	┌───┬───┬───┬───┬───┬───┬───┬───────┐
-	│ 0 │ 1 │ 0 │ 1 │ 1 │ 1 │ 0 │ RW(0) │
+	│ 0 │ 1 │ 0 │ 1 │ 1 │ 1 │ 0 │ RW(0) │ = 0x5C
 	└───┴───┴───┴───┴───┴───┴───┴───────┘
 ---
 #### uint8_t I2CMaster::start()
