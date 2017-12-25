@@ -73,10 +73,12 @@ ISR(ADC_vect) {
     int valorAdc=ADC;
 
     float voltaje = (valorAdc*5.0)/1023.0;
-    int partedecimal = (voltaje - (int)voltaje) * 1000.0;
-
-    // envia el valor del ADC por el puerto serie.
-    printf("Valor ADC: %d   \tVoltaje: %d.%d v \n",valorAdc,(int)voltaje,partedecimal);
+    // envia los valores del ADC y voltaje por el puerto serie.
+    Serial.print("Valor ADC: ")
+    Serial.print(valorAdc);
+    Serial.print("\tVoltaje: ");
+    Serial.print(voltaje);
+    serial.println(" v");
     delay(500);
 
     // inicia de nuevo la conversión.
@@ -89,9 +91,6 @@ ISR(ADC_vect) {
 int main(void) {
 
     InitSystem();
-
-    // habilta nterrupciones globales
-    sei();
 
     // inicia primera conversión
     ADCSRA |= _BV(ADSC);
@@ -106,7 +105,7 @@ int main(void) {
 void InitSystem() {
 
     ADCInit();
-    USART_Init(9600);
+    Serial.init(9600);
 
 }
 
