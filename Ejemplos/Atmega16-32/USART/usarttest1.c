@@ -39,13 +39,8 @@
  *
  *
  ***************************************************************************************/
-/* Frecuencia de trabajo 8 MHz */
-#define F_CPU 8000000L
-
-/* Definiciones para usar interrupciones RX, TX y el uso
- * de la salida estandar para printf().*/
-#define USE_USART_INTERRUPTS
-#define USE_USART_STDIO
+/* Frecuencia de trabajo 16 MHz */
+#define F_CPU 16000000L
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -56,22 +51,21 @@
 int main(void)
 {
     /* Se inicializa la USART */
-    USART_Init(9600);
-    /* Se habilitan interrupciones globales */
-    sei();
-
+    Serial.init(9600);
+    
     /* Funcion de la libreria para*/
-    USART_PutString("*** EJEMPLO DE ECO CON LA USART ***\n");
+    Serial.println("*** EJEMPLO DE ECO CON LA USART ***\n");
 
     while(1){
 
         /* Si se ha recibido algún daro... */
-        if(USART_Kbhit()){
+        if(Serial.available())
+        {
             /* Imprimimos el dato por el puerto serie. */
-            printf( "Tecla: %c\n" , USART_GetChar() );
+            Serial.print( "Tecla: ");
+            Serial.println(Serial.read());
             /* Espera para que no se sature el buffer */
             _delay_ms(10);
-
         }
 
     }
