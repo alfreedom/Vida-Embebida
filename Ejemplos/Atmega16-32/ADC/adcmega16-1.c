@@ -37,42 +37,40 @@
  *
  *
  ***************************************************************************************/
-
 /************************************************************************
-*                       DEFINICION DE CONSTANTES
+* DEFINICION DE CONSTANTES
 ************************************************************************/
-#define F_CPU   8000000L
+#define F_CPU 16000000L
 #define USE_USART_STDIO
 
 #define POT_PIN 0
 #define delay(ms) _delay_ms((ms))
+
 /************************************************************************
-*                       INCLUSION DE LIBRERIAS
+* INCLUSION DE LIBRERIAS
 ************************************************************************/
 #include <avr/io.h>
 #include <util/delay.h>
 #include "usart.h"
+
 /************************************************************************
-*                         FUNCIONES PROTOTIPO
+* FUNCIONES PROTOTIPO
 ************************************************************************/
 void ADCInit();
 int ADCRead(unsigned char canal);
 
-/************************************************************************
-*                           VARIABLES GLOBALES
-************************************************************************/
-
 /************************************************************************/
+
 void InitSystem() {
 
     ADCInit();
-    USART_Init(9600);
+    Serial.init(9600);
 
 }
 
 /******************
- *      MAIN      *
- ******************/
+*      MAIN       *
+******************/
 int main(void) {
 
     unsigned int valorAdc;
@@ -81,7 +79,10 @@ int main(void) {
     while(1) {
 
         valorAdc = ADCRead(POT_PIN);
-        printf("Valor leido por pin %d : %d",POT_PIN,valorAdc);
+        Serial.print("Valor leido en el pin ");
+        Serial.print(POT_PIN);
+        Serial.print(": ");
+        Serial.print(valorAdc);
         delay(500);
     }
 
@@ -90,29 +91,31 @@ int main(void) {
 void ADCInit() {
 
     // Referencia AVCC
-    ADMUX = _BV(REFS0);
+    ADMUX = (1 << REFS0);
 
     // ADC habilitado con preescaler de 128
     // F_ADC = 8000000/128 = 62.5 KHz
     // F_MUESTREO = 62500/13 = 4.8Khz
     // T_MUESTREO = 1/4800 = 208us
     // La conversión tarda 208us.
-    ADCSRA = _BV(ADEN) | _BV(ADPS0) | _BV(ADPS1) | _BV(ADPS2);
+    ADCSRA = (1 << ADEN) | (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2);
 }
 int ADCRead(unsigned char canal) {
 
     // seleccionamos el nuevo canal a leer solo modificando solo
     // los bits MUX0 MUX1 y MUX2.
-    ADMUX = (ADMUX & 0xF8) | (canal & 0x07);
+    ADMUX =(ADMUX & 0xF8) | (canal & 0x07);
 
     // se inicia la conversión.
-    ADCSRA |= _BV(ADSC);
+    ADCSRA |= (1 << ADSC);
 
     // espera a que termina la conversión.
-    while(ADCSRA & _BV(ADSC));
+    while(ADCSRA & (11 << ADSC));
 
     // regresamos el valor de la conversión.
     return ADC;
 }
+
+
 
 
