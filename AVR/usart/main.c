@@ -15,46 +15,59 @@
 #include <util/delay.h> 
 #include "usart.h"
 
+void printData(uint8_t d);
+void onReceive(uint8_t c);
+
 void AVRInit()
 {
-	 DDRB = 0xFF;			// PORTB as Output
-	 Serial.init(115200);	// Initialize serial to 115200 baud
+	 DDRB = 0x01;			// PORTB as Output
+	 Serial.init(9600, onReceive);	// Initialize serial to 9600 baud
 }	
 
 int main()
 {
-	char cad[100];
-	char s[10];
-
+	
  	// Initialize the AVR modules
 	AVRInit();
 	// Print a new line
 	Serial.println();
 
-	// Print ascii values and codes
-	for (size_t i = 0; i <= 255; i++)
-	{
-		// Generate binary string
-		for (size_t j = 0; j < 9; j++)
-			s[j] = (i<<j) & 0x80 ? '1' : '0';
-
-		// Format the string whit the nomber
-		sprintf(cad, "CHAR: %c   BIN: %s  DEC: %d  HEX: 0x%.2X", i, s, i, i);
-		// Send formated string to serial port
-		Serial.println(cad);
-		
-	}
-	Serial.print(100);		// Prints a int number
-	Serial.print(-34500);	// Prints a int number
-	Serial.print(3.1416);	// Prints a decimal number
-	Serial.print(16000000);	// Prints a big number
-
-	// Turn ON PORTB leds
-	PORTB = 0xFF;
-
 	// Infinite loop
  	while(1)
- 	{}
+ 	{
+		 if(Serial.available())
+		 {
+			//Serial.print("From Polling:\t");
+			//printData(Serial.read());
+		 }
+	}
 
  	return 0;
+}
+
+void onReceive(uint8_t c)
+{
+	Serial.print("From interrupt:\t");
+	printData(c);
+}
+
+void printData(uint8_t d)
+{
+	char cad[100] = "";
+	char s[9];
+	char *_s = s;
+	PORTB = 0x01;
+	// Generate binary string
+	for (size_t j = 0; j < 8; j++)
+	{
+		if (j == 4)
+			*_s++ = ' ';
+		*_s++ = (d << j) & 0x80 ? '1' : '0';
+	}
+	// Format the string whit the number
+	sprintf(cad, "CHAR: %c\tBIN: %s\tDEC: %d \tHEX: 0x%.2X", d, s, d, d);
+	// Send formated string to serial port
+	Serial.println(cad);
+	Serial.flush();
+	PORTB = 0;
 }

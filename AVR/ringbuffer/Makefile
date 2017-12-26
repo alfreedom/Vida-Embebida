@@ -1,24 +1,23 @@
-
 # Name: Makefile
-# Author:    Alfredo Orozco de la Paz
-# Copyright: Copyright© 2017 Alfredo Orozco
-# License:   MIT
+# Author:    <insert your name here>
+# Copyright: <insert your copyright message here>
+# License:   <insert your license reference here>
 
-PROJECT_NAME = usart-lib
+PROJECT_NAME = ring_buffer
 DEVICE       = atmega32
 CLOCK        = 16000000
 PROGRAMMER   = -c usbtiny -P usb
-FUSES        = #-U hfuse:w:0xD9:m -U lfuse:w:0xDE:m
+FUSES        = -U hfuse:w:0xD9:m -U lfuse:w:0xDE:m #-U efuse:w:0xFF:m
 AVRDUDE      = avrdude $(PROGRAMMER) -p $(DEVICE) -V
 
 OBJECT_FILES = main.o
-OBJECT_FILES += ./src/usart.o
+OBJECT_FILES += ./src/ringbuffer.o
 
 INCLUDEPATHS =  -I ./include
+#INCLUDEPATHS += -I ./include/myFolder
 
-#CFLAGS = -fpermissive -std=c++11
 CFLAGS = -ffunction-sections -fpermissive -std=c++11
-LDFLAGS = -Wl,-gc-sections 
+LDFLAGS = -Wl,-gc-sections
 
 COMPILE = avr-g++ $(CFLAGS) $(LDFLAGS) -Wall -Os -DF_CPU=$(CLOCK) -mmcu=$(DEVICE) $(INCLUDEPATHS)
 
@@ -27,7 +26,6 @@ all: $(PROJECT_NAME).hex
 
 .c.o:
 	$(COMPILE) -c $< -o $@
-
 
 .cpp.o:
 	$(COMPILE) -c $< -o $@
@@ -38,7 +36,6 @@ all: $(PROJECT_NAME).hex
 .c.s:
 	$(COMPILE) -S $< -o $@
 
-
 .cpp.s:
 	$(COMPILE) -S $< -o $@
 
@@ -48,10 +45,13 @@ flash:	all
 fuse:
 	$(AVRDUDE) $(FUSES)
 
-install: flash fuse
+erase:
+	$(AVRDUDE) -e
 
-load: all
-	bootloadHID $(PROJECT_NAME).hex
+reset:
+	$(AVRDUDE)
+
+install: flash fuse
 
 clean:
 	rm -f $(PROJECT_NAME).hex $(PROJECT_NAME).elf $(OBJECT_FILES)
@@ -63,6 +63,7 @@ $(PROJECT_NAME).hex: $(PROJECT_NAME).elf
 	rm -f $(PROJECT_NAME).hex
 	avr-objcopy -j .text -j .data -O ihex $(PROJECT_NAME).elf $(PROJECT_NAME).hex
 	avr-size --format=avr --mcu=$(DEVICE) $(PROJECT_NAME).elf
+	# @rm -f $(OBJECT_FILES)
 
 disasm:	$(PROJECT_NAME).elf
 	avr-objdump -d $(PROJECT_NAME).elf

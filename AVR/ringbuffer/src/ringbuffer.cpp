@@ -19,9 +19,9 @@ RingBuffer::RingBuffer() {
 }
 
 void RingBuffer::push(uint8_t data) {
-  int next = _head+1;
+	buffer_ix_t next = _head + 1;
 
-  if(next >= MAX_RING_BUFFER_SIZE)
+	if(next >= RING_BUFFER_SIZE)
     next = 0;
     
   if(next == _tail)
@@ -33,12 +33,12 @@ void RingBuffer::push(uint8_t data) {
 }
 
 int RingBuffer::pop() {
-  int next =  _tail+1;
-  int data;
+	buffer_ix_t next = _tail + 1;
+	int data;
   if(_head == _tail)
     return -1;
 
-  if(next >= MAX_RING_BUFFER_SIZE)
+  if(next >= RING_BUFFER_SIZE)
     next = 0;
 
   data = _data[_tail];
@@ -64,10 +64,10 @@ bool RingBuffer::isEmpty() {
 }
 
 bool RingBuffer::isFull() {
-  return _size == MAX_RING_BUFFER_SIZE-1;
+  return _size == RING_BUFFER_SIZE-1;
 }
 
-int RingBuffer::size() {
-	int ret = this->_size;
-  return ret;
+buffer_ix_t RingBuffer::size()
+{
+	return this->_size;
 }

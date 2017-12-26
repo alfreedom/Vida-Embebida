@@ -3,7 +3,7 @@
  * 
  *        Autor:  Alfredo Orozco de la Paz      
  *        Fecha:  Septiembre 2017
- *   Procesador:  ATmega328p
+ *   Procesador:  ATmega16/32/24/88/168/328 etc...
  *   Frecuencia:  16 MHz
  *      Familia:  AVR-mega
  *   Compilador:  GNU avr-gcc
@@ -12,22 +12,20 @@
  *        Copyrigth© 2017 Alfredo Orozco
  * 
  ***************************************************************************************/
-#include "i2c_master.h"
 
-#include <util/twi.h>
+#include "i2c.h"
 #include <util/delay.h>
+I2C::I2C() {}
 
-
-I2CMaster::I2CMaster() {}
-
-// Initialize the I2C Module in Master mode
-void I2CMaster::init(uint8_t address, long scl_clock) {
+// Initialize the I2C Module
+void I2C::init(uint8_t address, long scl_clock) {
     this->address = address;
     TWSR = 0;
     TWBR = ((F_CPU/scl_clock)-16)/2;
+    PORTC |= (1<<PC4) | (1<<PC5);
 }
 
-uint8_t I2CMaster::start() {
+uint8_t I2C::start() {
 	
 	// Send start condition
     TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
@@ -51,14 +49,14 @@ uint8_t I2CMaster::start() {
     return 1;
 }
 
-void I2CMaster::stop(void) {
+void I2C::stop(void) {
 	// Send stop condition
     TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
     // whait for stop condition ends
     while(TWCR & (1<<TWSTO));
 }
 
-uint8_t I2CMaster::write(uint8_t data) {
+uint8_t I2C::write(uint8_t data) {
 	
     TWDR = data;
     TWCR = (1<<TWINT) | (1<<TWEN);
@@ -71,7 +69,7 @@ uint8_t I2CMaster::write(uint8_t data) {
     return 1;
 }
 
-uint8_t I2CMaster::write(uint8_t* data, uint16_t count) {
+uint8_t I2C::write(uint8_t* data, uint16_t count) {
 	
 	for (uint16_t i = 0; i < count; ++i)
 	{
@@ -88,7 +86,7 @@ uint8_t I2CMaster::write(uint8_t* data, uint16_t count) {
     return 1;
 }
 
-uint8_t I2CMaster::read(uint8_t* data, uint16_t count){
+uint8_t I2C::read(uint8_t* data, uint16_t count){
 	uint8_t i = 0;
 
 	while(count)
@@ -106,7 +104,7 @@ uint8_t I2CMaster::read(uint8_t* data, uint16_t count){
 
 }
 
-uint8_t I2CMaster::read(){
+uint8_t I2C::read(){
 
 	TWCR = (1<<TWINT) | (1<<TWEN);
 
