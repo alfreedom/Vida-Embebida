@@ -35,6 +35,7 @@ void AVRInit()
 int main()
 {
 	AVRInit();
+
 	while(1)
 	{
 		pcf.write(0x01);

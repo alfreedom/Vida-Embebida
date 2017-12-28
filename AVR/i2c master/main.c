@@ -27,7 +27,7 @@ uint8_t buff[20] = {0x3C, 0x38, 0x3C, 0x38,
 void AVRInit()
 {
 	// Intilize device at address 0x07 (include RD/WR bit)
-	i2c.init(0x07E);
+	i2c.init(0x7E);
 	DDRB = 0xFF;
 }
 

@@ -30,8 +30,8 @@ class I2CMaster {
 		}Start_t;
 
 		I2CMaster();
+		void init(uint8_t address , long scl_clock = SCL_CLOCK);
 		uint8_t start(Start_t rw = I2CMaster::WRITE);
-		void init(uint8_t address, long scl_clock = SCL_CLOCK);
 		void stop(void);
 		uint8_t write(uint8_t data);
 		uint8_t write(uint8_t* data, uint16_t count);

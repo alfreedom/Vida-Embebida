@@ -12,10 +12,9 @@
  *        Copyrigth© 2017 Alfredo Orozco
  * 
  ***************************************************************************************/
-#include "i2c_master.h"
-
 #include <util/twi.h>
 #include <util/delay.h>
+#include "i2c_master.h"
 
 
 I2CMaster::I2CMaster() {}
@@ -27,8 +26,9 @@ void I2CMaster::init(uint8_t address, long scl_clock) {
     TWBR = ((F_CPU/scl_clock)-16)/2;
 }
 
-uint8_t I2CMaster::start() {
-	
+uint8_t I2CMaster::start(Start_t rw)
+{
+
 	// Send start condition
     TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
     // wait for start condition ends
@@ -39,7 +39,11 @@ uint8_t I2CMaster::start() {
         return 0;
 
     // Send device address to device
-    TWDR = address;
+		if(rw)
+    	TWDR = address | 1;
+		else
+    	TWDR = address;
+			
     TWCR = (1<<TWINT) | (1<<TWEN);
 
     // wait for transmission
