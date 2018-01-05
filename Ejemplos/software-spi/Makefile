@@ -3,24 +3,21 @@
 # Copyright: <insert your copyright message here>
 # License:   <insert your license reference here>
 
-PROJECT_NAME = avr-pcf8574-lcd
+PROJECT_NAME = software-spi-master
 DEVICE       = atmega32
 CLOCK        = 16000000
 PROGRAMMER   = -c usbtiny -P usb
 FUSES        = -U hfuse:w:0xD9:m -U lfuse:w:0xDE:m #-U efuse:w:0xFF:m
-AVRDUDE      = avrdude $(PROGRAMMER) -p $(DEVICE) -V
+AVRDUDE      = avrdude $(PROGRAMMER) -p $(DEVICE)
 
 OBJECT_FILES = main.o
-OBJECT_FILES += src/i2c_master.o
-OBJECT_FILES += src/lcd_i2c.o
-OBJECT_FILES += src/usart.o
-OBJECT_FILES += src/pcf8574.o
+#OBJECT_FILES += ./src/mySource.o
 
-INCLUDEPATHS =  -I ./include
+#INCLUDEPATHS =  -I ./include
 #INCLUDEPATHS += -I ./include/myFolder
 
 CFLAGS = -ffunction-sections -fpermissive -std=c++11
-LDFLAGS = -Wl,-gc-sections -Wl,-u,vfprintf -lprintf_flt -lm
+LDFLAGS = -Wl,-gc-sections
 
 COMPILE = avr-g++ $(CFLAGS) $(LDFLAGS) -Wall -Os -DF_CPU=$(CLOCK) -mmcu=$(DEVICE) $(INCLUDEPATHS)
 

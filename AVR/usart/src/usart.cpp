@@ -88,7 +88,7 @@ void Usart::init(uint32_t baud, rxIntPtr rx_handle)
 	*_UCSRA |= (1 << U2X0);
 	#elif defined ( U2X )
   *_UCSRA |= (1 << U2X);
-	PORTB = 0xff;
+
 	#endif
 
   *_UBRRL = (unsigned char)baud;
@@ -337,7 +337,7 @@ void Usart::__udre_irq() {
   if(buffer_out.isEmpty()) 
     *_UCSRB &= ~(1 << UDRIE0);
   #endif
-  PORTB = 0xFF;
+
 }
 
 void Usart::__rx_irq() {

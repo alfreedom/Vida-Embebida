@@ -1,4 +1,4 @@
-#include <lcd_i2c.h>
+#include <lcd16x2_i2c.h>
 #include <util/delay.h>
 
 
@@ -9,7 +9,6 @@ LCD_I2C::LCD_I2C(){
 void LCD_I2C::init(uint8_t address)
 {
 	PCF8574::init(address);
-	// Dirección 0 del chip pcf8574: A2 = 1, A1 = 1, A0 = 1
 	_delay_ms(20);
 	PCF8574::setOutputs(0xFF);
 	PCF8574::write(0xFF);
@@ -36,35 +35,15 @@ void LCD_I2C::returnHome() {
 }
 
 void LCD_I2C::setCursor(uint8_t display_on, uint8_t show_cursor, uint8_t blink) {
-	this->mask = 0;
-	if(display_on)
-		this->mask |= 0x04;
-	if(show_cursor)
-		this->mask |= 0x02;
-	if(blink)
-		this->mask |= 0x01;
-
-	this->sendCmd(0x08 | this->mask);
+	this->sendCmd(0x08 | (display_on ? 0x04 : 0) | (show_cursor ? 0x02 : 0) | (blink ? 0x01 : 0));
 }
 void LCD_I2C::gotoxy(uint8_t x, uint8_t y)
 {
-	if (y != 1)
-		this->mask = 0x40;
-	else
-		this->mask = 0;
-	this->mask += x - 1;
-
-	this->sendCmd(0x80 | this->mask);
+	this->sendCmd(0x80 | ((y != 1 ? 0x40 : 0) + x - 1));
 }
 
 void LCD_I2C::shiftDisplay(uint8_t display_shift, uint8_t direction) {
-	this->mask = 0;
-	if(display_shift)
-		this->mask |= 0x08;
-	if(direction)
-		this->mask |= 0x40;
-
-	this->sendCmd(0x10 | this->mask);
+	this->sendCmd(0x10 | (display_shift ? 0x08 : 0) | (direction ? 0x40 : 0));
 }
 
 void LCD_I2C::setCGRamAddress(uint8_t address) {
@@ -86,23 +65,23 @@ void LCD_I2C::backlight(uint8_t state) {
 
 void LCD_I2C::sendCmd(uint8_t cmd)
 {
-	PCF8574::write(((cmd & 0xF0)) | (1 << EN) | (this->backlight_state << BL));
+	PCF8574::write(((cmd & 0xF0)) | (1 << LCD_EN) | (this->backlight_state << LCD_BL));
 	_delay_us(40);
-	PCF8574::write(this->backlight_state << BL);
+	PCF8574::write(this->backlight_state << LCD_BL);
 	_delay_us(40);
-	PCF8574::write((cmd << 4) | (1 << EN) | (this->backlight_state << BL));
+	PCF8574::write((cmd << 4) | (1 << LCD_EN) | (this->backlight_state << LCD_BL));
 	_delay_us(40);
-	PCF8574::write(this->backlight_state << BL);
+	PCF8574::write(this->backlight_state << LCD_BL);
 	_delay_ms(2);
 }
 void LCD_I2C::sendData(uint8_t data)
 {
-	PCF8574::write(((data & 0xF0)) | (1 << EN) | (this->backlight_state << BL) | (1 << RS));
+	PCF8574::write(((data & 0xF0)) | (1 << LCD_EN) | (this->backlight_state << LCD_BL) | (1 << LCD_RS));
 	_delay_us(40);
-	PCF8574::write(this->backlight_state << BL);
+	PCF8574::write(this->backlight_state << LCD_BL);
 	_delay_us(40);
-	PCF8574::write((data << 4) | (1 << EN) | (this->backlight_state << BL) | (1 << RS));
+	PCF8574::write((data << 4) | (1 << LCD_EN) | (this->backlight_state << LCD_BL) | (1 << LCD_RS));
 	_delay_us(40);
-	PCF8574::write(this->backlight_state << BL);
+	PCF8574::write(this->backlight_state << LCD_BL);
 	_delay_ms(2);
 }
