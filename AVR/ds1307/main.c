@@ -3,11 +3,11 @@
  *
  * Program Name:  ds1307
  *         Date:  2017-12-28
- *       Author:  YOUR_NAME
- *      License:  YOUR_LICENSE
+ *       Author:  Alfredo Orozco
+ *      License:  MIT
  *
  * Description:
- *  YOUR PROGRAM DESCRIPTION HERE.
+ *  RTC ds1307 sample.
  * 
  *****************************************************/
 #include <avr/io.h> 

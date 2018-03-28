@@ -1,9 +1,9 @@
 /***************************************************************************************
- * i2c.h
+ * i2c_master.h
  * 
  *        Autor:  Alfredo Orozco de la Paz      
- *        Fecha:  Septiembre 2017
- *   Procesador:  ATmega328p
+ *        Fecha:  Marzo 2018
+ *   Procesador:  ATmega32
  *   Frecuencia:  16 MHz
  *      Familia:  AVR-mega
  *   Compilador:  GNU avr-gcc
@@ -30,7 +30,7 @@ class I2CMaster {
 		}Start_t;
 
 		I2CMaster();
-		void init(uint8_t address , long scl_clock = SCL_CLOCK);
+		void init(uint8_t address = 0, long scl_clock = SCL_CLOCK);
 		uint8_t start(Start_t rw = I2CMaster::WRITE);
 		void stop(void);
 		uint8_t write(uint8_t data);

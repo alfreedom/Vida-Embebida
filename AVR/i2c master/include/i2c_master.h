@@ -1,15 +1,15 @@
 /***************************************************************************************
- * i2c.h
+ * i2c_master.h
  * 
  *        Autor:  Alfredo Orozco de la Paz      
- *        Fecha:  Septiembre 2017
- *   Procesador:  ATmega328p
+ *        Fecha:  Marzo 2018
+ *   Procesador:  ATmega32
  *   Frecuencia:  16 MHz
  *      Familia:  AVR-mega
  *   Compilador:  GNU avr-gcc
  *
  *
- *        Copyrigth© 2017 Alfredo Orozco
+ *        Copyrigth© 2018 Alfredo Orozco
  * 
  ***************************************************************************************/
 

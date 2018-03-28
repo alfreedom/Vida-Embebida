@@ -1,4 +1,17 @@
-
+/***************************************************************************************
+ * ds1307.cpp
+ * 
+ *        Autor:  Alfredo Orozco de la Paz      
+ *        Fecha:  Marzo 2018
+ *   Procesador:  ATmega32
+ *   Frecuencia:  16 MHz
+ *      Familia:  AVR-mega
+ *   Compilador:  GNU avr-gcc
+ *
+ *
+ *        Copyrigth© 2017 Alfredo Orozco
+ * 
+ ***************************************************************************************/
 
 #include <stdint.h>
 #include "ds1307.h"
