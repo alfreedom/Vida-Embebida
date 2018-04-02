@@ -13,7 +13,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="assets/css/zenburn.css">
-		
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -25,7 +25,7 @@
 
 		<!-- Estilos para las presentaciones -->
 		<link rel="stylesheet" href="assets/css/fredstyle.css">
-		
+
 	</head>
 	<body>
 		<div class="reveal">
@@ -33,8 +33,8 @@
 
 				<!-- INICIO Slide 0 -->
 				<section>
-					<h2>Programación de Micros <span class="theme-color">AVR</span> en Linux</h2> 
-					<img width="60%" src="assets/img/linux+avr3.png" alt="">
+					<h2>Programación de Micros <span class="theme-color">AVR</span> en Linux</h2>
+					<img width="60%" src="assets/img/linux+avr3.jpg" alt="">
 				</section>
 				<!-- FIN Slide 0 -->
 
@@ -55,7 +55,7 @@
 					</p>
 				</section>
 				<!-- FIN Slide 2 -->
-				
+
 				<!-- INICIO Slide 3 -->
 				<section>
 					<h3>¿Cómo se utiliza?</h3>
@@ -65,12 +65,12 @@
 					<p class="theme-color description">Para ver la ayuda del programa se debe ejecutar el comando</p>
 					<pre class="bash-command">
 						<code class="bash" data-trim data-noescape>
-							$ <span style="color:darkseagreen">apos</span> -?
+							$ <span style="color:darkseagreen">apos</span> ?
 						</code>
 					</pre>
 				</section>
 				<!-- FIN Slide 3 -->
-				
+
 				<!-- INICIO Slide 4 -->
 				<section>
 					<h3>Creación de un proyecto</h3>
@@ -88,19 +88,19 @@
 						el archivo <span class="highlight-red">Makefile</span>, el archivo <span class="highlight-red">main.c</span>
 						y un archivo <span class="highlight-red">README.md</span>
 					</p>
-					
+
 				</section>
 				<!-- FIN Slide 4 -->
-				
+
 				<!-- INICIO Slide 5 -->
 				<section>
 					<h3>Opciones del programa APOS</h3>
 					<p class="theme-color description">
 						Por default el programa crea un proyecto para el micro <span class="highlight-red">atmega328p</span>
-						a una frecuencia de <span class="highlight-red">16 MHz</span> configurado para utilizar el programador <span class="highlight-red">usbasp</span>
+						a una frecuencia de <span class="highlight-red">16 MHz</span> configurado para utilizar el programador <span class="highlight-red">usbtiny</span>
 					</p>
 					<p class="description medium-text">
-						<span class="highlight-cyan">-d</span>: Define el micro AVR a utilizar.
+						<span class="highlight-cyan">-m</span>: Define el micro AVR a utilizar.
 						<br>
 						<span class="highlight-cyan">-f</span>: Define la frecuencia de operación.
 						<br>
@@ -108,19 +108,19 @@
 					</p>
 					<pre class="bash-command">
 						<code class="bash" data-trim data-noescape>
-							$ <span class="highlight">apos</span> <span class="highlight-cyan">-d</span> atemga32 <span class="highlight-cyan">-f</span> 8000000 <span class="highlight-cyan">-p</span> dragon_isp NOMBRE_PROYECTO
+							$ <span class="highlight">apos</span> <span class="highlight-cyan">-m</span> atemga32 <span class="highlight-cyan">-f</span> 16000000 <span class="highlight-cyan">-p</span> dragon_isp NOMBRE_PROYECTO
 						</code>
 					</pre>
-					
+
 				</section>
 				<!-- FIN Slide 5 -->
-				
+
 				<!-- INICIO Slide 6 -->
 				<section>
 					<h3>Otras opciones</h3>
 					<p class="theme-color description">
 						APOS permite otras opciones avanzadas, como la creación de un proyecto con el
-						codigo de un programa blink, la inicialización de un repositorio GIT y 
+						codigo de un programa blink, la inicialización de un repositorio GIT y
 						la definición de los fusibles del microcontrolador.
 					</p>
 					<p class="description medium-text">
@@ -128,15 +128,15 @@
 						<br>
 						<span class="highlight-cyan">-g</span>: Inicializa el proyecto con repositorio GIT.
 						<br>
-						<span class="highlight-cyan">-l</span>: Define el valor del fusible bajo.
+						<span class="highlight-cyan">-lf</span>: Define el valor del fusible bajo.
 						<br>
-						<span class="highlight-cyan">-h</span>: Define el valor del fusible alto.
+						<span class="highlight-cyan">-hf</span>: Define el valor del fusible alto.
 						<br>
-						<span class="highlight-cyan">-e</span>: Define el valor del fusible extendido.
+						<span class="highlight-cyan">-ef</span>: Define el valor del fusible extendido.
 					</p>
 				</section>
 				<!-- FIN Slide 6 -->
-				
+
 				<!-- INICIO Slide 7 -->
 				<section>
 					<h2>Hola Mundo</h2>
@@ -145,39 +145,41 @@
 					</p>
 					<pre class="bash">
 						<code data-trim data-noescape>
-							$ <span class="mredium-text highlight">apos</span> <span class="highlight-cyan">-d</span> atemga32 <span class="highlight-cyan">-f</span> 16000000  hola_mundo
-							
-							Project Information
-							*Project Name:    hola_mundo
-							*Git Repository:  False
-							*Blink Template:  True
-							*Microcontroller: atmega32
-							*CPU Frequency:   16000000
-							*Low Fuse:        DE
-							*High Fuse:       D9
-							*Extended Fuse:   FF
-							*Programmer:      usbasp
-							
+							$ <span class="mredium-text highlight">apos</span> <span class="highlight-cyan">-m</span> atemga32 <span class="highlight-cyan">-f</span> 16000000  hola_mundo
+
 							apos: Project "hola_mundo" created!
+
+							Project Information:
+						  
+							 Project Name:    "hola_mundo"
+							 Git Repository:  False
+							 Blink Template:  False
+							 Microcontroller: atmega328p
+							 CPU Frequency:   16000000
+							 Low Fuse:        DE
+							 High Fuse:       D9
+							 Extended Fuse:   FF
+							 Programmer:      usbtiny
+						  
 						</code>
 					</pre>
 				</p>
-				
+
 			</section>
 			<!-- FIN Slide 7 -->
-			
+
 			<!-- INICIO Slide 8 -->
 			<section>
 				<h3>Estructura del proyecto</h3>
 				<p class="theme-color description">
-					
+
 				</p>
-				
+
 				<ul class="tree">
 					<li>
 						<span style="color:yellow">hola_mundo</span>
 						<ul>
-							
+
 							<li>
 								<span class="highlight-red">include</span>
 								<ul>
@@ -198,7 +200,7 @@
 				</ul>
 			</section>
 			<!-- FIN Slide 8 -->
-			
+
 			<!-- INICIO Slide 9 -->
 		</section>
 		<section>
@@ -213,7 +215,7 @@
 						</pre>
 					</p>
 				</section>
-				
+
 				<section>
 					<p class="theme-color description">
 						Abrir la terminal integrada de Visual Studio Code en el menú <span class="highlight-cyan">Ver&rarr;Terminal integrado</span>
@@ -245,27 +247,27 @@
 					<h3>Archivo main.c</h3>
 					<pre class="cpp">
 						<code style="text-align: left" data-trim >
-							void AVRInit() { 
-								DDBR = 0xFF // Puerto B como salida
+							void AVRInit() {
+							    DDBR = 0xFF // Puerto B como salida
 							}
-							
+
 							int main() {
-								AVRInit();
-								
-								while(1) // Ciclo Infinito
-								{ 
-									PORTB = 0xFF;   // Enciende los leds.
-									_delay_ms(1000) // Retardo de 1s
-									PORTB = 0;   // Apaga los leds.
-									_delay_ms(1000) // Retardo de 1s
-								}
-								return 0;
+							    AVRInit();
+
+							    while(1) // Ciclo Infinito
+							    {
+							        PORTB = 0xFF;   // Enciende los leds
+							        _delay_ms(1000) // Retardo de 1s
+							        PORTB = 0;      // Apaga los leds
+							        _delay_ms(1000) // Retardo de 1s
+							    }
+							    return 0;
 							}
 						</code>
 					</pre>
-				</section>	
+				</section>
 				<!-- FIN Slide 10 -->
-				
+
 				<!-- INICIO Slide 11 -->
 				<section>
 					<h3>Archivo Makefile</h3>
@@ -273,21 +275,21 @@
 						<code style="text-align: left" data-trim >
 							PROJECT_NAME = hola_mundo
 							DEVICE       = atmega32
-							CLOCK        = 16000000 
-							PROGRAMMER   = -c usbasp -P usb 
-							FUSES        = -U hfuse:w:0xD9:m -U lfuse:w:0xDE:m #-U efuse:w:0xFF:m 
-							AVRDUDE      = avrdude $(PROGRAMMER) -p $(DEVICE) 
-							
-							OBJECT_FILES   = main.o 
-							#OBJECT_FILES += ./src/mySource.o 
-							
-							INCLUDEPATHS   = -I ./include 
+							CLOCK        = 16000000
+							PROGRAMMER   = -c usbasp -P usb
+							FUSES        = -U hfuse:w:0xD9:m -U lfuse:w:0xDE:m #-U efuse:w:0xFF:m
+							AVRDUDE      = avrdude $(PROGRAMMER) -p $(DEVICE)
+
+							OBJECT_FILES   = main.o
+							#OBJECT_FILES += ./src/mySource.o
+
+							INCLUDEPATHS   = -I ./include
 							#INCLUDEPATHS += -I ./include/myFolder
 						</code>
 					</pre>
-				</section>	
+				</section>
 				<!-- FIN Slide 11 -->
-				
+
 				<!-- INICIO Slide 12 -->
 				<section >
 					<h2>Siguiente capítulo</h2>
@@ -300,7 +302,7 @@
 			</div>
 		</div>
 
-		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>		
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script src="assets/js/head.min.js"></script>
 		<script src="assets/js/reveal.js"></script>
 

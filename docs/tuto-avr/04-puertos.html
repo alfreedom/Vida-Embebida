@@ -31,33 +31,151 @@
 			<div class="slides">
 
 				<!-- INICIO Slide 0 -->
+				<section>
+					<h2>Programación de Micros <span class="theme-color">AVR</span> en Linux</h2>
+					<img width="60%" src="assets/img/linux+avr3.jpg" alt="">
+				</section>
 				<!-- FIN Slide 0 -->
 
 				<!-- INICIO Slide 1 -->
+				<section >
+					<h2>Puertos E/S de los AVR</h2>
+				   <p class="theme-color">Programación de puertos digitals de entrada/salida</p>
+				</section>
 				<!-- FIN Slide 1 -->
 				
 				<!-- INICIO Slide 2 -->
+				<section>
+					<h3>Registros</h3>
+					<p style="text-align: justify;">
+						Los microcontroladores <span class="theme-color">AVR</span> tienen asociados 3
+						registros para cada uno de sus puertos de E/S, es decir 3 para el <span class="theme-color">PUERTO A</span>,
+						3 para el puerto <span class="theme-color">PUERTO B</span>, 3 para el <span class="theme-color">PUERTO C</span> y así sucesivamente dependiendo cuantos puertos
+						implemente el modelo del microcontrolador AVR.
+					</p>
+					<ul>
+						<li><span class="theme-color">DDRx</span></li>
+						<li><span class="theme-color">PORTx</span></li>
+						<li><span class="theme-color">PINx</span></li>
+					</ul>
+				</section>
 				<!-- FIN Slide 2 -->
 
 				<!-- INICIO Slide 3 -->
+				<section>
+					<h3>DDRx</h3>
+					<p style="text-align: justify;">
+						<span class="theme-color">Data Direction Register x</span>: Registro de dirección de datos.
+						
+					</p>
+					<p style="text-align: justify;">
+						Este registro configura si los pines del puerto <span class="theme-color">x</span> 
+						serán de entrada o salida. Es de 8 bits, donde cada bit representa un pin del puerto 
+						<span class="theme-color">x</span>. Si se escribe un 1 en algún bit de este registro, el pin 
+						correspondiente será configurado como salida, si se escribe un 0 se configura como de entrada. 
+						Por default todos los pines se configuran como entrada despues de un RESET.
+					</p>
+				</section>
 				<!-- FIN Slide 3 -->
 
 				<!-- INICIO Slide 4 -->
+				<section>
+					<h3>PORTx</h3>
+					<p style="text-align: justify;">
+						<span class="theme-color">Data Register x</span>: Registro de Datos.
+						
+					</p>
+					<p style="text-align: justify;">
+						Este registro tiene una doble funcionalidad; cuando un puerto es de salida,
+						el valor escrito (1 o 0) en alguno bit del registro será reflejado en el pin correspondiente .
+					</p>
+					<p style="text-align: justify;">
+						Cuando el puerto es configurado como entrada, escribir un 1 en algún bit del registro
+						activará la resistencia <span class="theme-color">PULL-UP</span> interna correspondiente
+						al pin. Un 0 desactiva la resistencia <span class="theme-color">PULL-UP</span> interna.
+					</p>
+				</section>
 				<!-- FIN Slide 4 -->
 
 				<!-- INICIO Slide 5 -->
+				<section>
+					<h3>PINx</h3>
+					<p style="text-align: justify;">
+						<span class="theme-color">Port Input Register x</span>: Registro Entrada de Datos.
+					</p>
+					<p style="text-align: justify;">
+						Este registro es de sólo lectura, y se utiliza para leer el estado de los puertos 
+						configurados como entrada. El valor de cada bit representa el estado lógico actual del
+						pin que le corresponde.
+					</p>
+					<p style="text-align: justify;">
+						En algunos modelos de microcontroladores (ver su datahseet), escribir en este registro
+						invierte el estado de los pines configurados como salida (toggle).
+					</p>
+				</section>
 				<!-- FIN Slide 5 -->
 
 				<!-- INICIO Slide 6 -->
+				<section>
+					<h3>Ejemplo</h3>
+					<p style="text-align: justify;">
+						Configurar los pines 0, 1, 2 y 3 del <span class="theme-color">PUERTO B</span>
+						como entrada y los pines 4, 5, 6 y 7 como salida.
+					</p>
+					<img src="assets/img/DDRB-1.jpg" alt="">
+					<p style="text-align: justify;">
+						El valor del registro sería: <span class="theme-color">0xF0</span> (240 en decimal)
+					</p>
+					<pre class="cpp" style="text-align: left;">					
+						<code data-trim data-noescape>
+							DDRB = 0xF0;
+							DDRB = (1 << PB4) | (1 << PB5) | (1 << PB6) | (1 << PB7);
+						</code>
+					</pre>
+				</section>
 				<!-- FIN Slide 6 -->
 				
 				<!-- INICIO Slide 7 -->
+				<section>
+					<h3>Escritura en pines de salida</h3>
+					<p style="text-align: justify;">
+						Para escribir un 1 lógio en los pines 4 y 7 del <span class="theme-color">PUERTO B</span>
+						se haria escribiendo el valor <span class="theme-color">0x90</span> (144 en decimal)
+					</p>
+					<img src="assets/img/PORTB-1.jpg" alt="">
+					<pre class="cpp" style="text-align: left;">					
+						<code data-trim data-noescape>
+							PORTB = 0x90;
+							PORTB = (1 << PB4) | (1 << PB7);
+						</code>
+					</pre>
+				</section>
 				<!-- FIN Slide 7 -->
 
 				<!-- INICIO Slide 8 -->
+				<section>
+					<h3>Leer el estado de una entrada </h3>
+					<p style="text-align: justify;">
+						Para leer el estado del pin 2 del <span class="theme-color">PUERTO B</span>
+						se lee el registro PINB completo y se hace una máscara con el bit 2 (0x04)
+					</p>
+					<img src="assets/img/PINB-1.jpg" alt="">
+					<pre class="cpp" style="text-align: left;">					
+						<code data-trim data-noescape>
+							int input = PINB & 0x04;
+							int input = PINB & (1 << PB2);
+						</code>
+					</pre>
+				</section>
 				<!-- FIN Slide 8 -->
 
 				<!-- INICIO Slide 9 -->
+				<section>
+					<h2>Siguiente capítulo</h2>
+					<h5>USART del ATmega32</h5>
+					<br>
+					<a href="05-usart.html">Ir al capitulo 5</a>
+				</section>
 				<!-- FIN Slide 9 -->
 				
 				<!-- INICIO Slide 10 -->

@@ -20,10 +20,10 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'assets/css/print/pdf.css' : 'assets/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-		
+
 		<!-- Estilos para las presentaciones -->
 		<link rel="stylesheet" href="assets/css/fredstyle.css">
-		
+
 	</head>
 	<body>
 		<div class="reveal">
@@ -31,8 +31,8 @@
 
 				<!-- INICIO Slide 0 -->
 				<section>
-					<h2>Programación de Micros <span class="theme-color">AVR</span> en Linux</h2> 
-					<img width="60%" src="assets/img/linux+avr3.png" alt="">
+					<h2>Programación de Micros <span class="theme-color">AVR</span> en Linux</h2>
+					<img width="60%" src="assets/img/linux+avr3.jpg" alt="">
 				</section>
 				<!-- FIN Slide 0 -->
 
@@ -58,50 +58,52 @@
 						</ul>
 					</section>
 					<!-- FIN Slide 3 -->
-					
+
 					<!-- INICIO Slide 4 -->
 					<section>
 						<h3>Sistema operativo Linux</h3>
 						<p class="theme-color">El sistema operativo linux de su agrado</p>
 						<br>
-						<img width="70%" src="assets/img/linuxes.png" alt="">
+						<img width="70%" src="assets/img/linuxes.jpg" alt="">
 					</section>
 					<!-- FIN Slide 4 -->
-					
+
 					<!-- INICIO Slide 5 -->
 					<section>
 						<h3>Compilador</h3>
 						<p class="theme-color">Compilador avr-gcc, binutils-avr y avr-libc</p>
-						<br> Debian y derivados:
+						Debian y derivados:
 						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
-							$ sudo apt-get install <span style="color:darkseagreen"> gcc-avr binutils-avr avr-libc</span>
+							$ sudo apt-get install<span style="color:darkseagreen"> gcc-avr binutils-avr avr-libc</span>
 						</code></pre> Fedora y RedHat:
 						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
-							$ sudo yum install <span style="color:darkseagreen"> avr-gcc avr-binutils avr-libc avrdude</span>
-						</code></pre> Arch y derivados:
+							$ sudo yum install<span style="color:darkseagreen"> avr-gcc avr-binutils avr-libc</span>
+						</code></pre> Arch Linux, Manjaro y derivados:
 						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
-							$ sudo pacman -Sy   <span style="color:darkseagreen"> avr-gcc avr-binutils avr-libc avrdude</span>
+							$ sudo pacman -Sy<span style="color:darkseagreen"> avr-gcc avr-binutils avr-libc</span>
 						</code></pre> Probar la instalación:
 						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
 							$ <span style="color:darkseagreen"></span>avr-gcc</span> --version
 						</code></pre>
 					</section>
 					<!-- FIN Slide 5 -->
-					
+
 					<!-- INICIO Slide 6 -->
 					<section>
 						<h3>Programador</h3>
-						<p class="theme-color">Software para programar los micros AVR</p>
-						<br> Debian y derivados:
-						<pre style="text-align: center;"><code class="bash"  data-trim data-noescape>
-									$ sudo apt-get install <span style="color:darkseagreen">avrdude</span>
-								</code></pre> Fedora y RedHat:
+						Debian y derivados:
 						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
-									$ sudo yum install <span style="color:darkseagreen">avrdude</span>
-							</code></pre> Probar la instalación:
+							$ sudo apt-get install<span style="color:darkseagreen"> avrdude</span>
+						</code></pre> Fedora y RedHat:
 						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
-									$ <span style="color:darkseagreen">avrdude</span> -v
-							</code></pre>
+							$ sudo yum install<span style="color:darkseagreen"> avrdude</span>
+						</code></pre> Arch Linux, Manjaro y derivados:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+							$ sudo pacman -Sy<span style="color:darkseagreen"> avrdude</span>
+						</code></pre> Probar la instalación:
+						<pre style="text-align: center;"><code class="bash" data-trim data-noescape>
+							$ <span style="color:darkseagreen"></span>avrdude</span> -v
+						</code></pre>
 					</section>
 					<!-- FIN Slide 6 -->
 
@@ -151,9 +153,9 @@
 							<li>Tarjeta de desarrollo basada en AVR</li>
 						</ul>
 					</section>
-					<!-- FIN Slide 10 -->					
+					<!-- FIN Slide 10 -->
 
-					<!-- INICIO Slide 11 -->					
+					<!-- INICIO Slide 11 -->
 					<section>
 						<h3>Programador USB</h3>
 						<p class="theme-color">Existen gran variedad de programadores USB, desde los profecionales hasta los OpenSource</p>
@@ -167,7 +169,7 @@
 						</ul>
 					</section>
 					<!-- FIN Slide 11 -->
-					
+
 					<!-- INICIO Slide 12 -->
 					<section>
 						<h3>Instalación del Programador </h3>
@@ -192,7 +194,7 @@
 					<!-- INICIO Slide 13 -->
 					<section>
 						<p>Agregar las reglas de los programadores</p>
-					
+
 						<pre style="text-align: left; font-size: 25px;">
 							<code class="bash" data-trim >
 								# Programmers for avrdude
@@ -210,7 +212,7 @@
 							</code>
 						</pre>
 						<a href="assets/99-avr.rules" class="small-text" target="_blank">
-							<img src="assets/img/download.png" style="position:relative; top:12px; background: none; border: none; margin: 0;" alt=""> Archivo 99-avr.rules</a>
+							<img src="assets/img/download.jpg" style="position:relative; top:12px; background: none; border: none; margin: 0;" alt=""> Archivo 99-avr.rules</a>
 					</section>
 					<!-- FIN Slide 13 -->
 
@@ -219,7 +221,7 @@
 						<p>Actualizar las reglas con los comandos</p>
 						<pre style="text-align: left; font-size: 25px;">
 									<code class="bash" data-trim data-noescape>
-										 $ sudo udevadm control --reload 
+										 $ sudo udevadm control --reload
 										 $ sudo udevadm trigger --action=add
 									</code>
 								</pre>

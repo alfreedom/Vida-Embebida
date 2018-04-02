@@ -31,49 +31,136 @@
 			<div class="slides">
 
 				<!-- INICIO Slide 0 -->
+				<section>
+					<h2>Programación de Micros <span class="theme-color">AVR</span> en Linux</h2>
+					<img width="60%" src="assets/img/linux+avr3.jpg" alt="">
+				</section>
 				<!-- FIN Slide 0 -->
 
 				<!-- INICIO Slide 1 -->
+				<section >
+					<h2>Carga del programa</h2>
+				   <p class="theme-color">Grabar programa en la memoria Flash</p>
+				</section>
 				<!-- FIN Slide 1 -->
 				
 				<!-- INICIO Slide 2 -->
+				<section>
+					<h3>Comunicación ISP</h3>
+					<p style="text-align: justify;">Existen distintas formas de conectar y programar un microcontrolador AVR, la más común
+					es mediante el puerto ISP (In-circuit Serial Programmer) el cual consiste en 6 pines: GND, VCC, RST, MOSI, MISO y SCK.
+					Este conector está disponible en versión de 6 y 10 pines.
+					</p>
+					<img width="30%" src="assets/img/isp-avr.jpg" alt="">
+				</section>
 				<!-- FIN Slide 2 -->
-
+				   
 				<!-- INICIO Slide 3 -->
+				<section>
+					<h3>Programadores ISP</h3>
+					<p style="text-align: justify;">
+						En el mercado existen una gran variedad de programadores para AVR, tanto los oficiales de la empresa Atmel 
+						como otros desarrollados por empresas o la comunidad Open Source
+					</p>
+					<img width="70%" src="assets/img/programadores.jpg" alt="">
+				</section>
 				<!-- FIN Slide 3 -->
-
+				
 				<!-- INICIO Slide 4 -->
+				<section>
+					<h3>Conexión ISP</h3>
+					<p style="text-align: justify;">
+						La conexión del programador se realiza mediante el puerto <span class="theme-color">SPI</span> (<span class="theme-color">MISO</span>, <span class="theme-color">MOSI</span> y <span class="theme-color">SCK</span>), el pin <span class="theme-color">RESET</span> y la alimentación (<span class="theme-color">VCC</span> y <span class="theme-color">GND</span>)
+					</p>
+					<img width="50%" src="assets/img/isp-avr-conn.jpg" alt="">
+				</section>
 				<!-- FIN Slide 4 -->
-
+				
 				<!-- INICIO Slide 5 -->
+				<section>
+					<h3>Cargar el .hex en el AVR</h3>
+					<p style="text-align: justify;">
+						Para grabar el programa compilado dentro de la memoria Flash desde un proyecto creado con
+						<span class="theme-color">APOS</span>, se ejecuta el comando 
+						<span class="theme-color">make flash</span>.
+					</p>
+					<pre class="bash" style="text-align: center;">					
+						<code data-trim data-noescape>
+							$ <span class="mredium-text highlight">make flash</span>
+						</code>
+					</pre>
+				</section>
 				<!-- FIN Slide 5 -->
 
 				<!-- INICIO Slide 6 -->
+				<section>
+					<h3>Grabar los fusibles</h3>
+					<p style="text-align: justify;">
+						Para grabar los fusbiles definidos a la hora de crear el proyecto con
+						<span class="theme-color">APOS</span>, se ejecuta el comando <span class="theme-color">make fuse</span>.
+					</p>
+					<pre class="bash" style="text-align: center;">					
+						<code data-trim data-noescape>
+							$ <span class="mredium-text highlight">make fuse</span>
+						</code>
+					</pre>
+				</section>
 				<!-- FIN Slide 6 -->
 				
 				<!-- INICIO Slide 7 -->
+				<section>
+					<h3>Grabar los fusibles y el .hex</h3>
+					<p style="text-align: justify;">
+						Para grabar tanto los fusbiles como el programa ejecutable se utiliza el comando
+						<span class="theme-color">make install</span>.
+					</p>
+					<pre class="bash" style="text-align: center;">					
+						<code data-trim data-noescape>
+							$ <span class="mredium-text highlight">make install</span>
+						</code>
+					</pre>
+				</section>
 				<!-- FIN Slide 7 -->
 
 				<!-- INICIO Slide 8 -->
+				<section>
+					<h3>Borra el chip AVR</h3>
+					<p style="text-align: justify;">
+						Para borrar la memoria flash y la memoria EEPROM se utiliza el comando
+						<span class="theme-color">make erase</span>.
+					</p>
+					<pre class="bash" style="text-align: center;">					
+						<code data-trim data-noescape>
+							$ <span class="mredium-text highlight">make erase</span>
+						</code>
+					</pre>
+				</section>
 				<!-- FIN Slide 8 -->
 
 				<!-- INICIO Slide 9 -->
+				<section>
+					<h3>Hacer RESET en el AVR</h3>
+					<p style="text-align: justify;">
+						Para generar un RESET del programa grabado en la memoria Flash del micro,
+						se utiliza el comando
+						<span class="theme-color">make reset</span>.
+					</p>
+					<pre class="bash" style="text-align: center;">					
+						<code data-trim data-noescape>
+							$ <span class="mredium-text highlight">make reset</span>
+						</code>
+					</pre>
+				</section>
 				<!-- FIN Slide 9 -->
 				
 				<!-- INICIO Slide 10 -->
-				<!-- FIN Slide 10 -->
-
-				<!-- INICIO Slide 11 -->
-				<!-- FIN Slide 11 -->
-				
-				<!-- INICIO Slide 12 -->
-				<!-- FIN Slide 12 -->
 				<section>
 					<h2>Siguiente capítulo</h2>
-					<h5>Puertos de los AVR</h5>
+					<h5>Puertos E/S de los AVR</h5>
 					<br>
 					<a href="04-puertos.html">Ir al capitulo 4</a>
 				</section>
+				<!-- FIN Slide 10 -->
 			</div>
 		</div>
 
