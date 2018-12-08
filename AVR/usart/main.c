@@ -65,7 +65,7 @@ void printData(uint8_t d)
 		*_s++ = (d << j) & 0x80 ? '1' : '0';
 	}
 	// Format the string whit the number
-	sprintf(cad, "CHAR: %c\tBIN: %s\tDEC: %d \tHEX: 0x%.2X", d, s, d, d);
+	sprintf(cad, "CHAR: %c\tBIN: %s\tDEC: %d HEX: 0x%.2X", d, s, d, d);
 	// Send formated string to serial port
 	Serial.println(cad);
 	Serial.flush();
